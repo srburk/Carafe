@@ -106,7 +106,7 @@ struct ContentView: View {
                                 
                                 TextField("Enter Amount", text: $amountObject.waterAmount)
                                     .padding()
-                                    .frame(width: 100, height: 30)
+                                    .frame(height: 30)
                                     .background(Color(red: 238/255, green: 238/255, blue: 238/255))
                                     .cornerRadius(5)
                                     .keyboardType(.decimalPad)
@@ -162,22 +162,23 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear() {
-//            BrewMethodStore.load { result in
-//                switch result {
-//                case .failure(let error):
-//                    fatalError(error.localizedDescription)
-//                case .success(let brewMethods):
-//                    brewMethodStore.brewMethods = brewMethods
-//                    print(brewMethods)
-//                }
-//            }
-            brewMethodStore.brewMethods.append(defaultBrewMethod)
-            brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: "French Press", brewRatio: 14))
-            brewMethodName = brewMethodStore.brewMethods[selectedBrewMethodIndex].title
+            BrewMethodStore.load { result in
+                switch result {
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                case .success(let brewMethods):
+                    brewMethodStore.brewMethods = brewMethods
+                    print(brewMethods)
+                }
+            }
+            
+            amountObject.brewRatio = brewMethodStore.brewMethods.count == 0 ? 15 : brewMethodStore.brewMethods[selectedBrewMethodIndex].brewRatio
+//            brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: "French Press", brewRatio: 14))
+//            brewMethodName = brewMethodStore.brewMethods[selectedBrewMethodIndex].title
         }
         
         .sheet(isPresented: $isShowingSettings) {
-            Settings(brewMethods: $brewMethodStore.brewMethods, selectedBrewMethodIndex: $selectedBrewMethodIndex)
+            Settings(brewMethodStore: brewMethodStore, selectedBrewMethodIndex: $selectedBrewMethodIndex)
         }
     }
 }

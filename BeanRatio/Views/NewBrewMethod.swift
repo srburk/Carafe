@@ -11,6 +11,9 @@ struct NewBrewMethod: View {
     
     @State var title: String
     @State var brewRatio: Int
+    @ObservedObject var brewMethodStore: BrewMethodStore
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         List {
@@ -25,16 +28,28 @@ struct NewBrewMethod: View {
         .listStyle(.grouped)
         .navigationTitle("New Method")
         .toolbar {
-
             ToolbarItem(placement: .navigationBarTrailing) {
-                Text("Add")
+                Button(action: {
+                    brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: title, brewRatio: brewRatio))
+                    BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
+                        if case .failure(let error) = result {
+                            fatalError(error.localizedDescription)
+                        }
+                    }
+                    self.presentationMode.wrappedValue.dismiss()
+                    
+                }) {
+                    Text("Add")
+                }
             }
         }
 }
 }
 
 struct NewBrewMethod_Previews: PreviewProvider {
+    // [BrewMethod(id: UUID(), title: "Chemex", brewRatio: 15), BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)]
+    
     static var previews: some View {
-        NewBrewMethod(title: "Hello", brewRatio: 17)
+        NewBrewMethod(title: "Hello", brewRatio: 17, brewMethodStore: BrewMethodStore())
     }
 }
