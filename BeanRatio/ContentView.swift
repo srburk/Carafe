@@ -72,16 +72,12 @@ struct ContentView: View {
                         
                         VStack() {
                             
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 25) {
-                                    WaterPreset(number: 1, isSelected: true)
-                                    ForEach(1..<9) { preset in
-                                        WaterPreset(number: preset, isSelected: false)
-                                    }
-                                }
+                            HStack(spacing: 25) {
+                                WaterPreset(waterAmount: $waterAmount, number: 1, isSelected: false)
+                                WaterPreset(waterAmount: $waterAmount, number: 2, isSelected: false)
+                                WaterPreset(waterAmount: $waterAmount, number: 3, isSelected: false)
                             }
                             .padding(.top, 25)
-                            .padding(.leading, 15)
 
                             Text("Water Amount")
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -107,6 +103,14 @@ struct ContentView: View {
                                     .pickerStyle(.segmented)
                             }
                             .padding([.leading, .trailing], 15)
+                            
+                            Text("Brew Ratio")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.leading, .trailing, .top], 15)
+                                .font(.headline)
+                            
+                            Stepper("1:\(brewRatio)", value: $brewRatio, in: 1...50, step: 1)
+                                .padding([.leading, .trailing], 15)
                             
                             List {
                                 Section(header: Text("Previous Brews").font(.headline).foregroundColor(.black)) {
@@ -142,16 +146,6 @@ struct ContentView: View {
                                 Text("Chemex")
                                     .font(.title3)
                             }.foregroundColor(.white)
-                        }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        
-                        Picker("Ratio", selection: $brewRatio) {
-                            ForEach(1..<(brewRatio)) {
-                                Text("1:\($0)")
-                            }
                         }
                         
                     }
