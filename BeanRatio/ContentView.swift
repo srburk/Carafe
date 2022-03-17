@@ -13,11 +13,8 @@ enum Units: String, CaseIterable {
     case grams, ounces
 }
 
-func calculateCoffee(amount: Int, ratio: Int) -> Int {
-    return amount / ratio
-}
-
 class AmountObject: ObservableObject {
+    
     @Published var waterAmount: String = "0" {
         didSet {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
@@ -34,14 +31,6 @@ class AmountObject: ObservableObject {
     }
     
     @Published var coffeeAmount: String = "0"
-//        didSet {
-//            animateCoffeeAmount = true
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                self.animateCoffeeAmount = false
-//            }
-//        }
-//    }
-//    @Published var animateCoffeeAmount: Bool = false
 }
 
 struct ContentView: View {
@@ -50,6 +39,12 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .clear
     }
     
+    var defaultBrewMethod = BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)
+    @State var brewMethodName = ""
+    
+    @StateObject var brewMethodStore = BrewMethodStore()
+    @State var selectedBrewMethodIndex = 0
+
     @ObservedObject var amountObject = AmountObject()
         
     // MARK: Unit State
@@ -77,24 +72,11 @@ struct ContentView: View {
                     Text(amountObject.coffeeAmount)
                         .foregroundColor(.white)
                         .font(.system(size: 100, weight: .semibold))
-//                        .transition(.opacity)
-//                        .animation(nil, value: amountObject.animateCoffeeAmount)
-//                        .animation(.spring(), value: amountObject.animateCoffeeAmount)
                     
-                    switch(selectedUnit) {
-                        case .grams:
-                            Text("grams of coffee")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25, weight: .regular))
-                                .padding(.bottom, 25)
-                        
-                        case .ounces:
-                            Text("ounces of coffee")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25, weight: .regular))
-                                .padding(.bottom, 25)
-                        
-                    }
+                    Text("grams of coffee")
+                        .foregroundColor(.white)
+                        .font(.system(size: 25, weight: .regular))
+                        .padding(.bottom, 25)
                     
                     
                     Spacer()
@@ -106,9 +88,12 @@ struct ContentView: View {
                         VStack() {
                             
                             HStack(spacing: 25) {
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 1)
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 2)
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 3)
+                                ForEach(1..<4) { index in
+                                    WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
+                                }
+//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 1)
+//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 2)
+//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 3)
                             }
                             .padding(.top, 25)
 
@@ -163,11 +148,10 @@ struct ContentView: View {
   
                         Button(action: {
                             isShowingSettings.toggle()
-                            brewMethod = "chemex"
                         }) {
                             HStack {
                                 Image(systemName: "chevron.down")
-                                Text("Chemex")
+                                Text("\(brewMethodStore.brewMethods.count == 0 ? " " : brewMethodStore.brewMethods[selectedBrewMethodIndex].title)")
                                     .font(.title3)
                             }.foregroundColor(.white)
                         }
@@ -177,8 +161,23 @@ struct ContentView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear() {
+//            BrewMethodStore.load { result in
+//                switch result {
+//                case .failure(let error):
+//                    fatalError(error.localizedDescription)
+//                case .success(let brewMethods):
+//                    brewMethodStore.brewMethods = brewMethods
+//                    print(brewMethods)
+//                }
+//            }
+            brewMethodStore.brewMethods.append(defaultBrewMethod)
+            brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: "French Press", brewRatio: 14))
+            brewMethodName = brewMethodStore.brewMethods[selectedBrewMethodIndex].title
+        }
+        
         .sheet(isPresented: $isShowingSettings) {
-            Settings()
+            Settings(brewMethods: $brewMethodStore.brewMethods, selectedBrewMethodIndex: $selectedBrewMethodIndex)
         }
     }
 }
