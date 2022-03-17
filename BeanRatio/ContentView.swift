@@ -8,92 +8,121 @@
 import SwiftUI
 import UIKit
 
-// Custom color
-extension Color {
-    static let customBrown = Color(red: 91 / 255, green: 79 / 255, blue: 65 / 255)
+enum Units: String, CaseIterable {
+    case grams, ounces
 }
 
 struct ContentView: View {
     
     init() {
-            UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().backgroundColor = .clear
     }
-    
-    let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
-    
-    @State var waterAmount = ""
-    @State var coffeeAmount = ""
-    @State var brewMethod = "Chemex"
-    
-    @State private var isShowingSettings = false
-    
-    @State private var brewType = 1
         
+    // MARK: Unit States
+    @State var waterAmount = "0"
+    @State var coffeeAmount = "0"
+    @State var selectedUnit: Units = .grams
+    
+    // MARK: Brewing Bindings
+    @State var brewMethod = "Chemex"
+    @State var brewRatio = 17
+    
+    // MARK: View Layout bindings
+    @State private var isShowingSettings = false
+            
     var body: some View {
         NavigationView {
             ZStack {
                 
                 Rectangle()
                     .ignoresSafeArea()
-//                    .foregroundColor(Color.customBrown)
                     .foregroundColor(Color.black)
                 
                 VStack {
-                    
-                    // Coffee Label
-                    
-                    Text("55")
+                                        
+                    Text(coffeeAmount)
                         .foregroundColor(.white)
                         .font(.system(size: 100, weight: .semibold))
-                        .frame(height: 150, alignment: .bottom)
                     
-                    Text("grams of coffee")
-                        .foregroundColor(.white)
-                        .font(.system(size: 25, weight: .regular))
+                    switch(selectedUnit) {
+                        case .grams:
+                            Text("grams of coffee")
+                                .foregroundColor(.white)
+                                .font(.system(size: 25, weight: .regular))
+                                .padding(.bottom, 25)
+                        
+                        case .ounces:
+                            Text("ounces of coffee")
+                                .foregroundColor(.white)
+                                .font(.system(size: 25, weight: .regular))
+                                .padding(.bottom, 25)
+                        
+                    }
+                    
                     
                     Spacer()
 
                     ZStack {
                         RoundedRectangle(cornerRadius: 45)
                             .foregroundColor(.white)
-                            .opacity(1)
-//                            .ignoresSafeArea()
                         
                         VStack() {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 15) {
-                                    ForEach(0..<10) { _ in
-                                        Circle()
-                                            .frame(width: 100, height: 100)
+                                    WaterPreset(number: 1, isSelected: true)
+                                    ForEach(1..<9) { preset in
+                                        WaterPreset(number: preset, isSelected: false)
                                     }
                                 }
                             }
-                            .padding(.top, 30)
-                            .padding(.leading, 10)
-                                                        
+                            .padding(.top, 25)
+                            .padding(.leading, 15)
+
+                            Text("Water Amount")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.leading, .trailing, .top], 15)
+                                .font(.headline)
+
+                            HStack {
+                                
+                                TextField("Enter Amount", text: $waterAmount)
+                                    .padding()
+                                    .frame(height: 30)
+                                    .background(Color(red: 238/255, green: 238/255, blue: 238/255))
+                                    .cornerRadius(5)
+                                    .keyboardType(.decimalPad)
+
+                                Picker("Units", selection: $selectedUnit) {
+                                    Text("Grams").tag(Units.grams)
+                                    Text("Fl. Oz.").tag(Units.ounces)
+                                }
+                                    .pickerStyle(.segmented)
+                            }
+                            .padding([.leading, .trailing], 15)
+                            
+//                            HStack {
+//                                Text("Water Amount:").font(.callout)
+//                                TextField("Enter amount", text: $waterAmount)
+//                                .keyboardType(.decimalPad)
+//                            }
+//                            .padding([.leading, .trailing], 15)
+                            
                             List {
-                                Section(header: Text("Custom").font(.headline)) {
-                                    TextField("Water Amount", text: $waterAmount)
-                                        .keyboardType(.decimalPad)
-                                    
-                                    Picker("Units", selection: $brewMethod) {
-                                        Text("Grams")
-                                        Text("Fl. Ounces")
-                                    }.pickerStyle(.segmented)
-                                    
-                                    Picker("Ratio", selection: $brewMethod) {
-                                        Text("1:17")
-                                        Text("1:14")
-                                    }.pickerStyle(.menu)
-                        
+                                Section(header: Text("Previous Brews").font(.headline).foregroundColor(.black)) {
+                                    Text("346 grams")
+                                    Text("500 grams")
                                 }
                             }
-                            .listStyle(.inset)
+                                .background(Color.white)
+                                .listStyle(.plain)
+                            
+//                            Spacer()
+                                                        
                         }
+
                     }
-                    .ignoresSafeArea()
-                    .frame(height: 450)
+                    .ignoresSafeArea(.all)
                 }
                 
                 .toolbar {
@@ -109,15 +138,24 @@ struct ContentView: View {
                                     .font(.title3)
                             }.foregroundColor(.white)
                         }
+                        
                     }
-            }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        
+                        Picker("Ratio", selection: $brewRatio) {
+                            ForEach(1..<(brewRatio)) {
+                                Text("1:\($0)")
+                            }
+                        }
+                        
+                    }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
         }
         .sheet(isPresented: $isShowingSettings) {
-            List {
-                Text("Settings")
-            }
+            Settings()
         }
     }
 }
