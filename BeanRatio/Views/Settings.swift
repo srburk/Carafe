@@ -15,7 +15,7 @@ struct Settings: View {
         NavigationView {
             List {
                 Section(header: Text("Brewing Methods")) {
-                    Label("French Press", systemImage: "checkmark")
+                    Label("French Press", systemImage: "checkmark.circle.fill").foregroundColor(.black)
                     Label("Chemex", systemImage: "circle").foregroundColor(.black)
                     Button(action: {
                         

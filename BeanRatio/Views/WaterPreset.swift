@@ -16,19 +16,12 @@ struct WaterPreset: View {
     @State var tap = false
     
     var number: Int
-    var isSelected: Bool
     
     var body: some View {
         ZStack {
             
-            if (isSelected) {
-                Circle()
-                    .frame(width: 100, height: 100)
-                    .overlay(Circle().stroke(Color.blue, lineWidth: 5).frame(width: 95, height: 95))
-            } else {
-                Circle()
-                    .frame(width: 100, height: 100)
-            }
+            Circle()
+                .frame(width: 100, height: 100)
             
             VStack {
                 Image(systemName: "cup.and.saucer.fill")
@@ -56,13 +49,13 @@ struct WaterPreset: View {
         }
         
         .animation(nil, value: tap)
-        .scaleEffect(tap ? 0.90 : 1)
+        .scaleEffect(tap ? 0.85 : 1)
         .animation(.spring(), value: tap)
     }
 }
 
 struct WaterPreset_Previews: PreviewProvider {
     static var previews: some View {
-        WaterPreset(waterAmount: .constant("0"), number: 1, isSelected: true)
+        WaterPreset(waterAmount: .constant("0"), number: 1)
     }
 }
