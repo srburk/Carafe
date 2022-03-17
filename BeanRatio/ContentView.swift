@@ -73,7 +73,7 @@ struct ContentView: View {
                         VStack() {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 15) {
+                                HStack(spacing: 25) {
                                     WaterPreset(number: 1, isSelected: true)
                                     ForEach(1..<9) { preset in
                                         WaterPreset(number: preset, isSelected: false)
@@ -123,6 +123,11 @@ struct ContentView: View {
 
                     }
                     .ignoresSafeArea(.all)
+                    
+                }
+                
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
                 
                 .toolbar {

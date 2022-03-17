@@ -21,6 +21,7 @@
 		3B1C714C2722487A000505BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B1C714E2722487C000505BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B1C71512722487C000505BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3B26F21927E2F65A00CD8F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +56,7 @@
 		3B1C71492722487A000505BF /* BeanRatio */ = {
 			isa = PBXGroup;
 			children = (
+				3B26F21927E2F65A00CD8F44 /* Info.plist */,
 				3BAF91D227E2BE1B00009BD2 /* Views */,
 				3B1C714A2722487A000505BF /* BeanRatioApp.swift */,
 				3B1C714C2722487A000505BF /* ContentView.swift */,
@@ -288,6 +290,7 @@
 				DEVELOPMENT_TEAM = 3B52K98W7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeanRatio/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,6 +321,7 @@
 				DEVELOPMENT_TEAM = 3B52K98W7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeanRatio/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
