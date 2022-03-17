@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Settings: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationView {
             List {
@@ -29,7 +32,11 @@ struct Settings: View {
             .listStyle(.grouped)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Done")
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Done").foregroundColor(.black)
+                    }
                 }
             }
             .navigationTitle("BeanRatio")

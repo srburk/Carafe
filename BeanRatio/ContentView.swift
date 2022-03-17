@@ -12,6 +12,10 @@ enum Units: String, CaseIterable {
     case grams, ounces
 }
 
+func calculateCoffee(amount: Int, ratio: Int) -> Int {
+    return amount / ratio
+}
+
 struct ContentView: View {
     
     init() {
@@ -92,21 +96,17 @@ struct ContentView: View {
                                     .background(Color(red: 238/255, green: 238/255, blue: 238/255))
                                     .cornerRadius(5)
                                     .keyboardType(.decimalPad)
+                                    .onChange(of: waterAmount) { newAmount in
+                                        coffeeAmount = String(calculateCoffee(amount: Int(waterAmount) ?? 0, ratio: brewRatio))
+                                    }
 
                                 Picker("Units", selection: $selectedUnit) {
-                                    Text("Grams").tag(Units.grams)
-                                    Text("Fl. Oz.").tag(Units.ounces)
+                                    Text("g / mL").tag(Units.grams)
+                                    Text("fl. oz.").tag(Units.ounces)
                                 }
                                     .pickerStyle(.segmented)
                             }
                             .padding([.leading, .trailing], 15)
-                            
-//                            HStack {
-//                                Text("Water Amount:").font(.callout)
-//                                TextField("Enter amount", text: $waterAmount)
-//                                .keyboardType(.decimalPad)
-//                            }
-//                            .padding([.leading, .trailing], 15)
                             
                             List {
                                 Section(header: Text("Previous Brews").font(.headline).foregroundColor(.black)) {
