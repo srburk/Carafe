@@ -30,7 +30,7 @@ struct Settings: View {
                         
                     }
 
-                    NavigationLink("New Method", destination: NewBrewMethod(title: "Hello", brewRatio: 4, brewMethodStore: brewMethodStore, presentationMode: self._presentationMode)).foregroundColor(.blue)
+                    NavigationLink("New Method", destination: NewBrewMethod(title: "", brewRatio: 15, brewMethodStore: brewMethodStore, presentationMode: self._presentationMode)).foregroundColor(.blue)
                 }
                 Section(header: Text("General")) {
                     Text("About")

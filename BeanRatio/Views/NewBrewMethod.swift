@@ -13,12 +13,14 @@ struct NewBrewMethod: View {
     @State var brewRatio: Int
     @ObservedObject var brewMethodStore: BrewMethodStore
     
+    @State var isActive = false
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         List {
             Section(header: Text("Name")) {
-                TextField("Name", text: $title)
+                TextField("Brewing Method", text: $title)
             }
             
             Section(header: Text("Ratio")) {
@@ -30,17 +32,27 @@ struct NewBrewMethod: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: title, brewRatio: brewRatio))
-                    BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
-                        if case .failure(let error) = result {
-                            fatalError(error.localizedDescription)
+                    
+                    if (isActive) {
+                        brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: title, brewRatio: brewRatio))
+                        BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
+                            if case .failure(let error) = result {
+                                fatalError(error.localizedDescription)
+                            }
                         }
+                        self.presentationMode.wrappedValue.dismiss()
                     }
-                    self.presentationMode.wrappedValue.dismiss()
                     
                 }) {
-                    Text("Add")
+                    if (isActive) {
+                        Text("Add").foregroundColor(.accentColor)
+                    } else {
+                        Text("Add").foregroundColor(.gray)
+                    }
                 }
+//                .alert(isPresented: $showingError) {
+//                    Alert(title: Text("Oops! Please Enter a Name"), dismissButton: .default(Text("OK")))
+//                }
             }
         }
 }
