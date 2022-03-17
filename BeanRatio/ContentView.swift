@@ -20,16 +20,28 @@ func calculateCoffee(amount: Int, ratio: Int) -> Int {
 class AmountObject: ObservableObject {
     @Published var waterAmount: String = "0" {
         didSet {
-            coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
+                coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+            }
         }
     }
     @Published var brewRatio = 17 {
         didSet {
-            coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+            withAnimation {
+                coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+            }
         }
     }
     
     @Published var coffeeAmount: String = "0"
+//        didSet {
+//            animateCoffeeAmount = true
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                self.animateCoffeeAmount = false
+//            }
+//        }
+//    }
+//    @Published var animateCoffeeAmount: Bool = false
 }
 
 struct ContentView: View {
@@ -40,14 +52,11 @@ struct ContentView: View {
     
     @ObservedObject var amountObject = AmountObject()
         
-    // MARK: Unit States
-    @State var waterAmount = "0"
-    @State var coffeeAmount = "0"
+    // MARK: Unit State
     @State var selectedUnit: Units = .grams
     
     // MARK: Brewing Bindings
     @State var brewMethod = "Chemex"
-    @State var brewRatio = 17
     
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
@@ -68,6 +77,9 @@ struct ContentView: View {
                     Text(amountObject.coffeeAmount)
                         .foregroundColor(.white)
                         .font(.system(size: 100, weight: .semibold))
+//                        .transition(.opacity)
+//                        .animation(nil, value: amountObject.animateCoffeeAmount)
+//                        .animation(.spring(), value: amountObject.animateCoffeeAmount)
                     
                     switch(selectedUnit) {
                         case .grams:
@@ -115,8 +127,8 @@ struct ContentView: View {
                                     .keyboardType(.decimalPad)
 
                                 Picker("Units", selection: $selectedUnit) {
-                                    Text("g / mL").tag(Units.grams)
-                                    Text("fl. oz.").tag(Units.ounces)
+                                    Text("grams").tag(Units.grams)
+                                    Text("ounces").tag(Units.ounces)
                                 }
                                     .pickerStyle(.segmented)
                             }
@@ -145,10 +157,6 @@ struct ContentView: View {
                     .ignoresSafeArea(.all)
                     
                 }
-                
-//                .onTapGesture {
-//                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//                }
                 
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
