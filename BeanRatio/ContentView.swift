@@ -173,8 +173,10 @@ struct ContentView: View {
             }
             
             amountObject.brewRatio = brewMethodStore.brewMethods.count == 0 ? 15 : brewMethodStore.brewMethods[selectedBrewMethodIndex].brewRatio
-//            brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: "French Press", brewRatio: 14))
-//            brewMethodName = brewMethodStore.brewMethods[selectedBrewMethodIndex].title
+        }
+        
+        .onChange(of: selectedBrewMethodIndex) { newState in
+            amountObject.brewRatio = brewMethodStore.brewMethods.count == 0 ? 15 : brewMethodStore.brewMethods[selectedBrewMethodIndex].brewRatio
         }
         
         .sheet(isPresented: $isShowingSettings) {
