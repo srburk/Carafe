@@ -27,6 +27,11 @@ struct NewBrewMethod: View {
                 Stepper("1:\(brewRatio)", value: $brewRatio, in: 1...50, step: 1)
             }
         }
+        .onChange(of: title) { newState in
+            if (title != "" || title != " ") {
+                isActive = true
+            }
+        }
         .listStyle(.grouped)
         .navigationTitle("New Method")
         .toolbar {
@@ -50,9 +55,6 @@ struct NewBrewMethod: View {
                         Text("Add").foregroundColor(.gray)
                     }
                 }
-//                .alert(isPresented: $showingError) {
-//                    Alert(title: Text("Oops! Please Enter a Name"), dismissButton: .default(Text("OK")))
-//                }
             }
         }
 }
