@@ -13,6 +13,8 @@ struct NewBrewMethod: View {
     @State var brewRatio: Int
     @ObservedObject var brewMethodStore: BrewMethodStore
     
+    @Binding var selectedBrewMethod: BrewMethod?
+    
     @State var isActive = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -39,13 +41,18 @@ struct NewBrewMethod: View {
                 Button(action: {
                     
                     if (isActive) {
-                        brewMethodStore.brewMethods.append(BrewMethod(id: UUID(), title: title, brewRatio: brewRatio))
+                        
+                        let newBrewMethod = BrewMethod(id: UUID(), title: title, brewRatio: brewRatio)
+                        
+                        brewMethodStore.brewMethods.append(newBrewMethod)
                         BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
                             if case .failure(let error) = result {
                                 fatalError(error.localizedDescription)
                             }
                         }
                         self.presentationMode.wrappedValue.dismiss()
+                        
+                        selectedBrewMethod = newBrewMethod
                     }
                     
                 }) {
@@ -64,6 +71,6 @@ struct NewBrewMethod_Previews: PreviewProvider {
     // [BrewMethod(id: UUID(), title: "Chemex", brewRatio: 15), BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)]
     
     static var previews: some View {
-        NewBrewMethod(title: "Hello", brewRatio: 17, brewMethodStore: BrewMethodStore())
+        NewBrewMethod(title: "Hello", brewRatio: 17, brewMethodStore: BrewMethodStore(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }
