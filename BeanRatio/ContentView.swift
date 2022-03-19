@@ -61,7 +61,6 @@ struct ContentView: View {
     
     @StateObject var brewMethodStore = BrewMethodStore()
     @StateObject var historyStore = HistoryStore()
-//    @State var selectedBrewMethodIndex = 0
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -69,9 +68,6 @@ struct ContentView: View {
     @State public var selectedBrewMethod: BrewMethod? = nil
 
     @ObservedObject var amountObject = AmountObject()
-        
-    // MARK: Unit State
-//    @State var selectedUnit: Units = .grams
     
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
@@ -120,7 +116,7 @@ struct ContentView: View {
                             
                             HStack(spacing: 25) {
                                 ForEach(1..<4) { index in
-                                    WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
+                                    WaterPreset(waterAmount: $amountObject.waterAmount, selectedUnit: $amountObject.selectedUnit, number: index)
                                 }
                             }
                             .padding(.top, 25)
@@ -218,11 +214,6 @@ struct ContentView: View {
         
         .onChange(of: scenePhase) { phase in
             
-//            if phase == .active {
-//                print("Loaded: \(historyStore.history)")
-//            }
-            
-//            print("State change -> \(phase)")
             if phase == .inactive {
                 
                 if (Double(amountObject.waterAmount) != 0.0 && Double(amountObject.waterAmount) != historyStore.history.first?.amount) {
@@ -241,7 +232,6 @@ struct ContentView: View {
                         historyStore.history.remove(at: historyStore.history.endIndex - 1)
                     }
                 }
-                
                 
             }
                 
