@@ -116,7 +116,7 @@ struct ContentView: View {
                             
                             HStack(spacing: 25) {
                                 ForEach(1..<4) { index in
-                                    WaterPreset(waterAmount: $amountObject.waterAmount, selectedUnit: $amountObject.selectedUnit, number: index)
+                                    WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
                                 }
                             }
                             .padding(.top, 25)

@@ -11,7 +11,6 @@ struct WaterPreset: View {
     
     // Binding passed from parent
     @Binding var waterAmount: String
-    @Binding var selectedUnit: Units
     
     // animation for tapping
     @State var tap = false
@@ -42,12 +41,7 @@ struct WaterPreset: View {
             }
         }
         .onTapGesture {
-            switch (selectedUnit) {
-            case .grams:
-                waterAmount = String(format: "%.1f", Double(number) * 118)
-            case .ounces:
-                waterAmount = String(format: "%.1f", Double(number) * 118 * 28.3495)
-            }
+            waterAmount = String(format: "%.1f", Double(number) * 118)
             tap = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 tap = false
@@ -62,6 +56,6 @@ struct WaterPreset: View {
 
 struct WaterPreset_Previews: PreviewProvider {
     static var previews: some View {
-        WaterPreset(waterAmount: .constant("0"), selectedUnit: .constant(.grams), number: 1)
+        WaterPreset(waterAmount: .constant("0"), number: 1)
     }
 }

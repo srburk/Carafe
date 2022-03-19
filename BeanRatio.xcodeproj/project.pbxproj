@@ -16,6 +16,7 @@
 		3B1C71522722487C000505BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1C71512722487C000505BF /* Preview Assets.xcassets */; };
 		3B26D5A927E67FC80097F49B /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5A827E67FC70097F49B /* HistoryStore.swift */; };
 		3B26D5AB27E68DAE0097F49B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AA27E68DAE0097F49B /* History.swift */; };
+		3B26D5AD27E6A0430097F49B /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AC27E6A0430097F49B /* Store.swift */; };
 		3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */; };
 		3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D527E2C95100009BD2 /* Settings.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		3B1C71512722487C000505BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3B26D5A827E67FC70097F49B /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		3B26D5AA27E68DAE0097F49B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		3B26D5AC27E6A0430097F49B /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		3B26F21927E2F65A00CD8F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				3B1C714C2722487A000505BF /* ContentView.swift */,
 				3B1C714E2722487C000505BF /* Assets.xcassets */,
 				3B1C71502722487C000505BF /* Preview Content */,
+				3B26D5AC27E6A0430097F49B /* Store.swift */,
 			);
 			path = BeanRatio;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				3B0834DC27E3C4650080DEED /* BrewMethod.swift in Sources */,
 				3B0834DE27E3C5030080DEED /* BrewMethodStore.swift in Sources */,
 				3B1C714B2722487A000505BF /* BeanRatioApp.swift in Sources */,
+				3B26D5AD27E6A0430097F49B /* Store.swift in Sources */,
 				3B26D5A927E67FC80097F49B /* HistoryStore.swift in Sources */,
 				3B0834E027E3D8A20080DEED /* NewBrewMethod.swift in Sources */,
 				3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */,
