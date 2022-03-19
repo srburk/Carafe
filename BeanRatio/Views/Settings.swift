@@ -13,10 +13,26 @@ struct Settings: View {
     @ObservedObject var brewMethodStore: BrewMethodStore
     @Binding var selectedBrewMethodIndex: Int
     
+    @Binding var selectedBrewMethod: BrewMethod?
+    
     func delete(at offsets: IndexSet) {
-        brewMethodStore.brewMethods.remove(atOffsets: offsets)
         
+        print(offsets)
         
+        offsets.forEach { index in
+            if (brewMethodStore.brewMethods[index].id == selectedBrewMethod?.id) {
+                
+                brewMethodStore.brewMethods.remove(atOffsets: offsets)
+                
+                if (brewMethodStore.brewMethods.isEmpty) {
+                    selectedBrewMethod = nil
+                } else {
+                    selectedBrewMethod = brewMethodStore.brewMethods.first
+                }
+            } else {
+                brewMethodStore.brewMethods.remove(atOffsets: offsets)
+            }
+        }
         
         BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
             if case .failure(let error) = result {
@@ -40,19 +56,22 @@ struct Settings: View {
 //                                }
 //                        }
                         
-                        let systemImage = (brewMethodStore.brewMethods[selectedBrewMethodIndex].id == brewMethod.id) ? "checkmark.circle.fill" : "circle";
+//                        let systemImage = (brewMethodStore.brewMethods[selectedBrewMethodIndex].id == brewMethod.id) ? "checkmark.circle.fill" : "circle";
+                        
+                        let systemImage = (selectedBrewMethod?.id == brewMethod.id) ? "checkmark.circle.fill" : "circle"
                         
                         Label("\(brewMethod.title)", systemImage: systemImage).foregroundColor(.black)
                         
                             .onTapGesture {
-                                var count = 0
-                                for _ in brewMethodStore.brewMethods {
-                                    if (brewMethodStore.brewMethods[count].id == brewMethod.id) {
-                                        selectedBrewMethodIndex = count
-                                        return
-                                    }
-                                    count += 1
-                                }
+//                                var count = 0
+                                selectedBrewMethod = brewMethod
+//                                for _ in brewMethodStore.brewMethods {
+//                                    if (brewMethodStore.brewMethods[count].id == brewMethod.id) {
+//                                        selectedBrewMethodIndex = count
+//                                        return
+//                                    }
+//                                    count += 1
+//                                }
 //                                selectedBrewMethodIndex = brewMethodStore.brewMethods.firstIndex(where: $0 == brewMethod)
                             }
                         
@@ -86,6 +105,6 @@ struct Settings: View {
 struct Settings_Previews: PreviewProvider {
     
     static var previews: some View {
-        Settings(brewMethodStore: BrewMethodStore(), selectedBrewMethodIndex: .constant(1))
+        Settings(brewMethodStore: BrewMethodStore(), selectedBrewMethodIndex: .constant(1), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }

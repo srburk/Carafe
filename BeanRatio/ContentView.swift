@@ -44,6 +44,9 @@ struct ContentView: View {
     
     @StateObject var brewMethodStore = BrewMethodStore()
     @State var selectedBrewMethodIndex = 0
+    
+    // keep track of selected BrewMethod
+    @State var selectedBrewMethod: BrewMethod? = nil
 
     @ObservedObject var amountObject = AmountObject()
         
@@ -145,7 +148,10 @@ struct ContentView: View {
                         }) {
                             HStack {
                                 Image(systemName: "chevron.down")
-                                Text("\(brewMethodStore.brewMethods.count == 0 ? " " : brewMethodStore.brewMethods[selectedBrewMethodIndex].title)")
+//                                Text("\(brewMethodStore.brewMethods.count == 0 ? " " : brewMethodStore.brewMethods[selectedBrewMethodIndex].title)")
+//                                    .font(.title3)
+                                
+                                Text("\(selectedBrewMethod?.title ?? " ")")
                                     .font(.title3)
                             }.foregroundColor(.white)
                         }
@@ -162,7 +168,7 @@ struct ContentView: View {
                     fatalError(error.localizedDescription)
                 case .success(let brewMethods):
                     brewMethodStore.brewMethods = brewMethods
-                    print(brewMethods)
+                    selectedBrewMethod = (brewMethodStore.brewMethods.count == 0) ? nil : brewMethodStore.brewMethods.first
                 }
             }
             
@@ -174,7 +180,7 @@ struct ContentView: View {
         }
         
         .sheet(isPresented: $isShowingSettings) {
-            Settings(brewMethodStore: brewMethodStore, selectedBrewMethodIndex: $selectedBrewMethodIndex)
+            Settings(brewMethodStore: brewMethodStore, selectedBrewMethodIndex: $selectedBrewMethodIndex, selectedBrewMethod: $selectedBrewMethod)
         }
     }
 }
