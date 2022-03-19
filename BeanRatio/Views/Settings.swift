@@ -11,14 +11,12 @@ struct Settings: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var brewMethodStore: BrewMethodStore
-    @Binding var selectedBrewMethodIndex: Int
+//    @Binding var selectedBrewMethodIndex: Int
     
     @Binding var selectedBrewMethod: BrewMethod?
     
     func delete(at offsets: IndexSet) {
-        
-        print(offsets)
-        
+                
         offsets.forEach { index in
             if (brewMethodStore.brewMethods[index].id == selectedBrewMethod?.id) {
                 
@@ -85,6 +83,6 @@ struct Settings: View {
 struct Settings_Previews: PreviewProvider {
     
     static var previews: some View {
-        Settings(brewMethodStore: BrewMethodStore(), selectedBrewMethodIndex: .constant(1), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
+        Settings(brewMethodStore: BrewMethodStore(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }

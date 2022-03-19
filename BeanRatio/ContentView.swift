@@ -43,7 +43,10 @@ struct ContentView: View {
     @State var brewMethodName = ""
     
     @StateObject var brewMethodStore = BrewMethodStore()
-    @State var selectedBrewMethodIndex = 0
+    @StateObject var historyStore = HistoryStore()
+//    @State var selectedBrewMethodIndex = 0
+    
+    @Environment(\.scenePhase) private var scenePhase
     
     // keep track of selected BrewMethod
     @State var selectedBrewMethod: BrewMethod? = nil
@@ -55,6 +58,17 @@ struct ContentView: View {
     
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
+    
+    func delete(at offsets: IndexSet) {
+                
+        historyStore.history.remove(atOffsets: offsets)
+        
+        HistoryStore.save(history: historyStore.history) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
             
     var body: some View {
         NavigationView {
@@ -126,13 +140,17 @@ struct ContentView: View {
                             
                             List {
                                 Section(header: Text("Previous Brews").font(.headline).foregroundColor(.black)) {
-                                    Text("346 grams")
-                                    Text("500 grams")
+                                    ForEach($historyStore.history) { $history in
+                                        Text(String("\(history.amount)g of water"))
+                                            .onTapGesture {
+                                                amountObject.waterAmount = String(history.amount)
+                                            }
+                                    }
+                                    .onDelete(perform: delete)
                                 }
                             }
                                 .background(Color.white)
                                 .listStyle(.plain)
-                                                                                    
                         }
 
                     }
@@ -148,8 +166,6 @@ struct ContentView: View {
                         }) {
                             HStack {
                                 Image(systemName: "chevron.down")
-//                                Text("\(brewMethodStore.brewMethods.count == 0 ? " " : brewMethodStore.brewMethods[selectedBrewMethodIndex].title)")
-//                                    .font(.title3)
                                 
                                 Text("\(selectedBrewMethod?.title ?? " ")")
                                     .font(.title3)
@@ -172,15 +188,54 @@ struct ContentView: View {
                 }
             }
             
-            amountObject.brewRatio = brewMethodStore.brewMethods.count == 0 ? 15 : brewMethodStore.brewMethods[selectedBrewMethodIndex].brewRatio
+            HistoryStore.load { result in
+                switch result {
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                case .success(let history):
+                    historyStore.history = history
+                }
+            }
+                        
         }
         
-        .onChange(of: selectedBrewMethodIndex) { newState in
-            amountObject.brewRatio = brewMethodStore.brewMethods.count == 0 ? 15 : brewMethodStore.brewMethods[selectedBrewMethodIndex].brewRatio
+        .onChange(of: scenePhase) { phase in
+            
+            if phase == .active {
+                print("Loaded: \(historyStore.history)")
+            }
+            
+            print("State change -> \(phase)")
+            if phase == .inactive {
+                
+                if (Double(amountObject.waterAmount) != 0.0 && Double(amountObject.waterAmount) != historyStore.history.first?.amount) {
+                    
+                    
+                    print("Added: \(Double(amountObject.waterAmount) ?? 500)")
+                    
+                    historyStore.history.insert(History(id: UUID(), amount: Double(amountObject.waterAmount) ?? 500.0), at: 0)
+                    HistoryStore.save(history: historyStore.history) { result in
+                        if case .failure(let error) = result {
+                            fatalError(error.localizedDescription)
+                        }
+                    }
+                    
+                    if (historyStore.history.count > 4) {
+                        historyStore.history.remove(at: historyStore.history.endIndex - 1)
+                    }
+                }
+                
+                
+            }
+                
+        }
+        
+        .onChange(of: selectedBrewMethod?.brewRatio) { _ in
+            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 15
         }
         
         .sheet(isPresented: $isShowingSettings) {
-            Settings(brewMethodStore: brewMethodStore, selectedBrewMethodIndex: $selectedBrewMethodIndex, selectedBrewMethod: $selectedBrewMethod)
+            Settings(brewMethodStore: brewMethodStore, selectedBrewMethod: $selectedBrewMethod)
         }
     }
 }
