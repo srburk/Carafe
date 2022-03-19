@@ -39,7 +39,7 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .clear
     }
     
-    var defaultBrewMethod = BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)
+//    var defaultBrewMethod = BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)
     @State var brewMethodName = ""
     
     @StateObject var brewMethodStore = BrewMethodStore()
@@ -49,9 +49,6 @@ struct ContentView: View {
         
     // MARK: Unit State
     @State var selectedUnit: Units = .grams
-    
-    // MARK: Brewing Bindings
-    @State var brewMethod = "Chemex"
     
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
@@ -91,9 +88,6 @@ struct ContentView: View {
                                 ForEach(1..<4) { index in
                                     WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
                                 }
-//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 1)
-//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 2)
-//                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 3)
                             }
                             .padding(.top, 25)
 
