@@ -15,18 +15,35 @@ enum Units: String, CaseIterable {
 
 class AmountObject: ObservableObject {
     
+    func calculateCoffeeAmount() {
+        switch (selectedUnit) {
+        case .grams:
+            coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+        case .ounces:
+            coffeeAmount = String(format: "%.1f", ((Double(waterAmount) ?? 0.0) * 28.3495) / Double(brewRatio))
+        }
+    }
+    
     @Published var waterAmount: String = "0" {
         didSet {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
-                coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+                calculateCoffeeAmount()
             }
         }
     }
+    
     @Published var brewRatio = 17 {
         didSet {
             withAnimation {
-                coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+//                coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+                calculateCoffeeAmount()
             }
+        }
+    }
+    
+    @Published var selectedUnit: Units = .grams {
+        didSet {
+            calculateCoffeeAmount()
         }
     }
     
@@ -49,12 +66,12 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     
     // keep track of selected BrewMethod
-    @State var selectedBrewMethod: BrewMethod? = nil
+    @State public var selectedBrewMethod: BrewMethod? = nil
 
     @ObservedObject var amountObject = AmountObject()
         
     // MARK: Unit State
-    @State var selectedUnit: Units = .grams
+//    @State var selectedUnit: Units = .grams
     
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
@@ -122,7 +139,7 @@ struct ContentView: View {
                                     .cornerRadius(5)
                                     .keyboardType(.decimalPad)
 
-                                Picker("Units", selection: $selectedUnit) {
+                                Picker("Units", selection: $amountObject.selectedUnit) {
                                     Text("grams").tag(Units.grams)
                                     Text("ounces").tag(Units.ounces)
                                 }
@@ -201,17 +218,17 @@ struct ContentView: View {
         
         .onChange(of: scenePhase) { phase in
             
-            if phase == .active {
-                print("Loaded: \(historyStore.history)")
-            }
+//            if phase == .active {
+//                print("Loaded: \(historyStore.history)")
+//            }
             
-            print("State change -> \(phase)")
+//            print("State change -> \(phase)")
             if phase == .inactive {
                 
                 if (Double(amountObject.waterAmount) != 0.0 && Double(amountObject.waterAmount) != historyStore.history.first?.amount) {
                     
                     
-                    print("Added: \(Double(amountObject.waterAmount) ?? 500)")
+//                    print("Added: \(Double(amountObject.waterAmount) ?? 500)")
                     
                     historyStore.history.insert(History(id: UUID(), amount: Double(amountObject.waterAmount) ?? 500.0), at: 0)
                     HistoryStore.save(history: historyStore.history) { result in
