@@ -13,11 +13,8 @@ enum Units: String, CaseIterable {
     case grams, ounces
 }
 
-func calculateCoffee(amount: Int, ratio: Int) -> Int {
-    return amount / ratio
-}
-
 class AmountObject: ObservableObject {
+    
     @Published var waterAmount: String = "0" {
         didSet {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
@@ -34,14 +31,6 @@ class AmountObject: ObservableObject {
     }
     
     @Published var coffeeAmount: String = "0"
-//        didSet {
-//            animateCoffeeAmount = true
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                self.animateCoffeeAmount = false
-//            }
-//        }
-//    }
-//    @Published var animateCoffeeAmount: Bool = false
 }
 
 struct ContentView: View {
@@ -50,16 +39,36 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .clear
     }
     
+//    var defaultBrewMethod = BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)
+    @State var brewMethodName = ""
+    
+    @StateObject var brewMethodStore = BrewMethodStore()
+    @StateObject var historyStore = HistoryStore()
+//    @State var selectedBrewMethodIndex = 0
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
+    // keep track of selected BrewMethod
+    @State var selectedBrewMethod: BrewMethod? = nil
+
     @ObservedObject var amountObject = AmountObject()
         
     // MARK: Unit State
     @State var selectedUnit: Units = .grams
     
-    // MARK: Brewing Bindings
-    @State var brewMethod = "Chemex"
-    
     // MARK: View Layout bindings
     @State private var isShowingSettings = false
+    
+    func delete(at offsets: IndexSet) {
+                
+        historyStore.history.remove(atOffsets: offsets)
+        
+        HistoryStore.save(history: historyStore.history) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
             
     var body: some View {
         NavigationView {
@@ -77,24 +86,11 @@ struct ContentView: View {
                     Text(amountObject.coffeeAmount)
                         .foregroundColor(.white)
                         .font(.system(size: 100, weight: .semibold))
-//                        .transition(.opacity)
-//                        .animation(nil, value: amountObject.animateCoffeeAmount)
-//                        .animation(.spring(), value: amountObject.animateCoffeeAmount)
                     
-                    switch(selectedUnit) {
-                        case .grams:
-                            Text("grams of coffee")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25, weight: .regular))
-                                .padding(.bottom, 25)
-                        
-                        case .ounces:
-                            Text("ounces of coffee")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25, weight: .regular))
-                                .padding(.bottom, 25)
-                        
-                    }
+                    Text("grams of coffee")
+                        .foregroundColor(.white)
+                        .font(.system(size: 25, weight: .regular))
+                        .padding(.bottom, 25)
                     
                     
                     Spacer()
@@ -106,9 +102,9 @@ struct ContentView: View {
                         VStack() {
                             
                             HStack(spacing: 25) {
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 1)
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 2)
-                                WaterPreset(waterAmount: $amountObject.waterAmount, number: 3)
+                                ForEach(1..<4) { index in
+                                    WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
+                                }
                             }
                             .padding(.top, 25)
 
@@ -121,7 +117,7 @@ struct ContentView: View {
                                 
                                 TextField("Enter Amount", text: $amountObject.waterAmount)
                                     .padding()
-                                    .frame(width: 100, height: 30)
+                                    .frame(height: 30)
                                     .background(Color(red: 238/255, green: 238/255, blue: 238/255))
                                     .cornerRadius(5)
                                     .keyboardType(.decimalPad)
@@ -144,13 +140,17 @@ struct ContentView: View {
                             
                             List {
                                 Section(header: Text("Previous Brews").font(.headline).foregroundColor(.black)) {
-                                    Text("346 grams")
-                                    Text("500 grams")
+                                    ForEach($historyStore.history) { $history in
+                                        Text(String("\(history.amount)g of water"))
+                                            .onTapGesture {
+                                                amountObject.waterAmount = String(history.amount)
+                                            }
+                                    }
+                                    .onDelete(perform: delete)
                                 }
                             }
                                 .background(Color.white)
                                 .listStyle(.plain)
-                                                                                    
                         }
 
                     }
@@ -163,11 +163,11 @@ struct ContentView: View {
   
                         Button(action: {
                             isShowingSettings.toggle()
-                            brewMethod = "chemex"
                         }) {
                             HStack {
                                 Image(systemName: "chevron.down")
-                                Text("Chemex")
+                                
+                                Text("\(selectedBrewMethod?.title ?? " ")")
                                     .font(.title3)
                             }.foregroundColor(.white)
                         }
@@ -177,8 +177,65 @@ struct ContentView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear() {
+            BrewMethodStore.load { result in
+                switch result {
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                case .success(let brewMethods):
+                    brewMethodStore.brewMethods = brewMethods
+                    selectedBrewMethod = (brewMethodStore.brewMethods.count == 0) ? nil : brewMethodStore.brewMethods.first
+                }
+            }
+            
+            HistoryStore.load { result in
+                switch result {
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                case .success(let history):
+                    historyStore.history = history
+                }
+            }
+                        
+        }
+        
+        .onChange(of: scenePhase) { phase in
+            
+            if phase == .active {
+                print("Loaded: \(historyStore.history)")
+            }
+            
+            print("State change -> \(phase)")
+            if phase == .inactive {
+                
+                if (Double(amountObject.waterAmount) != 0.0 && Double(amountObject.waterAmount) != historyStore.history.first?.amount) {
+                    
+                    
+                    print("Added: \(Double(amountObject.waterAmount) ?? 500)")
+                    
+                    historyStore.history.insert(History(id: UUID(), amount: Double(amountObject.waterAmount) ?? 500.0), at: 0)
+                    HistoryStore.save(history: historyStore.history) { result in
+                        if case .failure(let error) = result {
+                            fatalError(error.localizedDescription)
+                        }
+                    }
+                    
+                    if (historyStore.history.count > 4) {
+                        historyStore.history.remove(at: historyStore.history.endIndex - 1)
+                    }
+                }
+                
+                
+            }
+                
+        }
+        
+        .onChange(of: selectedBrewMethod?.brewRatio) { _ in
+            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 15
+        }
+        
         .sheet(isPresented: $isShowingSettings) {
-            Settings()
+            Settings(brewMethodStore: brewMethodStore, selectedBrewMethod: $selectedBrewMethod)
         }
     }
 }
