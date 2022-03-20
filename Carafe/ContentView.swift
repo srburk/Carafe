@@ -5,12 +5,26 @@
 //  Created by Sam : on 10/21/21.
 //
 
-// TODO: 1. Project Name
-//       2. Launch Screen
-
 import SwiftUI
 import UIKit
 import Combine
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
 
 struct ContentView: View {
     
@@ -28,7 +42,7 @@ struct ContentView: View {
     @State var brewMethodName = ""
     @State public var selectedBrewMethod: BrewMethod? = nil
     @State private var isShowingSettings = false
-
+    
     @ObservedObject var amountObject = AmountObject()
         
     func delete(at offsets: IndexSet) {
@@ -68,12 +82,13 @@ struct ContentView: View {
                     Spacer()
 
                     ZStack {
-                        RoundedRectangle(cornerRadius: 45)
+                        Rectangle()
                             .foregroundColor((colorScheme == .light ? Color.white : Color(red: 35/255, green: 35/255, blue: 35/255)))
                             .onTapGesture {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             }
                             .shadow(color: (colorScheme == .light ? Color.gray : Color(red: 55/255, green: 55/255, blue: 55/255)), radius: 7)
+                            .cornerRadius(45, corners: [.topLeft, .topRight])
                         
                         VStack() {
                             
@@ -175,6 +190,9 @@ struct ContentView: View {
                     } else {
                         selectedBrewMethod = (mainStore.storage.brewMethods.count == 0) ? nil : mainStore.storage.brewMethods.first
                     }
+                    
+                    mainStore.storage.defaults.defaultUnits = storage.defaults.defaultUnits
+
                 }
             }
                                     

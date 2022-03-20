@@ -64,7 +64,7 @@ struct Settings: View {
                 }
                 
                 // MARK: General Settings
-                Section(header: Text("General")) {
+                Section(header: Text("Units")) {
                                         
 //                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
 //                        Text("Match System Theme").tag(Theme.auto)
@@ -74,20 +74,23 @@ struct Settings: View {
 //                            .navigationBarTitleDisplayMode(.inline)
 //                    }
                     
-                    Picker("Default Units", selection: $mainStore.storage.defaults.defaultUnits) {
+                    Picker(selection: $mainStore.storage.defaults.defaultUnits, label: Label("Default Units", systemImage: "scalemass").foregroundColor(.primary)) {
                         Text("Grams").tag(Units.grams)
                         Text("Ounces").tag(Units.ounces)
-//                            .navigationTitle("Units")
-//                            .navigationBarTitleDisplayMode(.inline)
                     }
                     
                     HStack {
-                        Text("Default Cup Size (g)")
-
-                        TextField("Enter Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
+                        Label("Cup Size", systemImage: "cup.and.saucer").foregroundColor(.primary)
+                        
+                        TextField("Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.secondary)
+                        
+//                        TextField("Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
+//                            .multilineTextAlignment(.trailing)
+//                            .keyboardType(.decimalPad)
+//                            .foregroundColor(.secondary)
                     }
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -95,11 +98,26 @@ struct Settings: View {
                     
                 }
                 
+                // MARK: Presets
+                Section(header: Text("Presets")) {
+                    Label("Water Presets", systemImage: "drop").foregroundColor(.primary)
+                    Label("Preset 2", systemImage: "2.circle").foregroundColor(.primary)
+                }
+                
                 // MARK: Feedback and About
-                Section(header: Text("Feedback")) {
-                    Link("Email Me", destination: URL(string: "https://www.apple.com")!).foregroundColor(.primary)
-                    Link("Twitter", destination: URL(string: "https://www.twitter.com")!).foregroundColor(.primary)
-                    NavigationLink("About", destination: Text("About this app"))
+                Section(header: Text("More")) {
+                    
+                    NavigationLink(destination: Text("Helo")) {
+                        Label("Help", systemImage: "questionmark.circle")
+                    }.foregroundColor(.primary)
+                    
+                    Link(destination: URL(string: "https://www.apple.com")!) {
+                        Label("Send Feedback", systemImage: "envelope")
+                    }.foregroundColor(.primary)
+                    
+                    NavigationLink(destination: Text("About this app")) {
+                        Label("About", systemImage: "info.circle")
+                    }.foregroundColor(.primary)
                 }
             }
             .listStyle(.insetGrouped)
