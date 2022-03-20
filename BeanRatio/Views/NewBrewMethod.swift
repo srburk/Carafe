@@ -11,8 +11,9 @@ struct NewBrewMethod: View {
     
     @State var title: String
     @State var brewRatio: Int
-    @ObservedObject var brewMethodStore: BrewMethodStore
+//    @ObservedObject var brewMethodStore: BrewMethodStore
     
+    @ObservedObject var mainStore: Store
     @Binding var selectedBrewMethod: BrewMethod?
     
     @State var isActive = false
@@ -44,8 +45,13 @@ struct NewBrewMethod: View {
                         
                         let newBrewMethod = BrewMethod(id: UUID(), title: title, brewRatio: brewRatio)
                         
-                        brewMethodStore.brewMethods.append(newBrewMethod)
-                        BrewMethodStore.save(brewMethods: brewMethodStore.brewMethods) { result in
+                        mainStore.storage.brewMethods.append(newBrewMethod)
+//                        BrewMethodStore.save(brewMethods: mainStore.storage.brewMethods) { result in
+//                            if case .failure(let error) = result {
+//                                fatalError(error.localizedDescription)
+//                            }
+//                        }
+                        Store.save(storage: mainStore.storage) { result in
                             if case .failure(let error) = result {
                                 fatalError(error.localizedDescription)
                             }
@@ -71,6 +77,6 @@ struct NewBrewMethod_Previews: PreviewProvider {
     // [BrewMethod(id: UUID(), title: "Chemex", brewRatio: 15), BrewMethod(id: UUID(), title: "Pourover", brewRatio: 15)]
     
     static var previews: some View {
-        NewBrewMethod(title: "Hello", brewRatio: 17, brewMethodStore: BrewMethodStore(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
+        NewBrewMethod(title: "Hello", brewRatio: 17, mainStore: Store(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }
