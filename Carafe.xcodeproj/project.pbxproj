@@ -24,7 +24,7 @@
 /* Begin PBXFileReference section */
 		3B0834DB27E3C4650080DEED /* BrewMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewMethod.swift; sourceTree = "<group>"; };
 		3B0834DF27E3D8A20080DEED /* NewBrewMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBrewMethod.swift; sourceTree = "<group>"; };
-		3B1C71472722487A000505BF /* BeanRatio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanRatio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1C71472722487A000505BF /* Carafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1C714A2722487A000505BF /* BeanRatioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRatioApp.swift; sourceTree = "<group>"; };
 		3B1C714C2722487A000505BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B1C714E2722487C000505BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		3B1C713E2722487A000505BF = {
 			isa = PBXGroup;
 			children = (
-				3B1C71492722487A000505BF /* BeanRatio */,
+				3B1C71492722487A000505BF /* Carafe */,
 				3B1C71482722487A000505BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,12 +71,12 @@
 		3B1C71482722487A000505BF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B1C71472722487A000505BF /* BeanRatio.app */,
+				3B1C71472722487A000505BF /* Carafe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3B1C71492722487A000505BF /* BeanRatio */ = {
+		3B1C71492722487A000505BF /* Carafe */ = {
 			isa = PBXGroup;
 			children = (
 				3B26D5AC27E6A0430097F49B /* Store.swift */,
@@ -88,7 +88,7 @@
 				3B1C714E2722487C000505BF /* Assets.xcassets */,
 				3B1C71502722487C000505BF /* Preview Content */,
 			);
-			path = BeanRatio;
+			path = Carafe;
 			sourceTree = "<group>";
 		};
 		3B1C71502722487C000505BF /* Preview Content */ = {
@@ -112,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3B1C71462722487A000505BF /* BeanRatio */ = {
+		3B1C71462722487A000505BF /* Carafe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B1C71552722487C000505BF /* Build configuration list for PBXNativeTarget "BeanRatio" */;
+			buildConfigurationList = 3B1C71552722487C000505BF /* Build configuration list for PBXNativeTarget "Carafe" */;
 			buildPhases = (
 				3B1C71432722487A000505BF /* Sources */,
 				3B1C71442722487A000505BF /* Frameworks */,
@@ -124,9 +124,9 @@
 			);
 			dependencies = (
 			);
-			name = BeanRatio;
+			name = Carafe;
 			productName = BeanRatio;
-			productReference = 3B1C71472722487A000505BF /* BeanRatio.app */;
+			productReference = 3B1C71472722487A000505BF /* Carafe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -144,7 +144,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3B1C71422722487A000505BF /* Build configuration list for PBXProject "BeanRatio" */;
+			buildConfigurationList = 3B1C71422722487A000505BF /* Build configuration list for PBXProject "Carafe" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -157,7 +157,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3B1C71462722487A000505BF /* BeanRatio */,
+				3B1C71462722487A000505BF /* Carafe */,
 			);
 		};
 /* End PBXProject section */
@@ -318,11 +318,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BeanRatio/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Carafe/Preview Content\"";
 				DEVELOPMENT_TEAM = 3B52K98W7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BeanRatio/Info.plist;
+				INFOPLIST_FILE = Carafe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -335,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.samburkhard.BeanRatio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samburkhard.Carafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -350,11 +350,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BeanRatio/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Carafe/Preview Content\"";
 				DEVELOPMENT_TEAM = 3B52K98W7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BeanRatio/Info.plist;
+				INFOPLIST_FILE = Carafe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,7 +367,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.samburkhard.BeanRatio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samburkhard.Carafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -378,7 +378,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3B1C71422722487A000505BF /* Build configuration list for PBXProject "BeanRatio" */ = {
+		3B1C71422722487A000505BF /* Build configuration list for PBXProject "Carafe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B1C71532722487C000505BF /* Debug */,
@@ -387,7 +387,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B1C71552722487C000505BF /* Build configuration list for PBXNativeTarget "BeanRatio" */ = {
+		3B1C71552722487C000505BF /* Build configuration list for PBXNativeTarget "Carafe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B1C71562722487C000505BF /* Debug */,
