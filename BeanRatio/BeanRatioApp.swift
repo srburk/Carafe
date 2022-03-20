@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct BeanRatioApp: App {
+    
+    @StateObject var mainStore = Store()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(mainStore: mainStore)
+//                .environment(\.colorScheme, (mainStore.storage.defaults.themeMode == .light) ? .light : .dark)
         }
     }
 }

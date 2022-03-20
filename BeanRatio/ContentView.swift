@@ -14,16 +14,16 @@ import Combine
 
 struct ContentView: View {
     
-    init() {
-        UITableView.appearance().backgroundColor = .clear
-    }
+//    init(mainStore: Store) {
+//        UITableView.appearance().backgroundColor = .clear
+//    }
     
     // MARK: Environment Variables
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.scenePhase) private var scenePhase
 
     // Persistent Store
-    @StateObject var mainStore = Store()
+    @ObservedObject var mainStore: Store
     
     // MARK: States
     @State var brewMethodName = ""
@@ -44,7 +44,7 @@ struct ContentView: View {
     }
             
     var body: some View {
-        NavigationView {
+        return NavigationView {
             ZStack {
                 
                 Rectangle()
@@ -80,7 +80,7 @@ struct ContentView: View {
                             
                             HStack(spacing: 25) {
                                 ForEach(1..<4) { index in
-                                    WaterPreset(waterAmount: $amountObject.waterAmount, number: index)
+                                    WaterPreset(waterAmount: $amountObject.waterAmount, mainStore: mainStore, number: index)
                                 }
                             }
                             .padding(.top, 25)
@@ -213,12 +213,13 @@ struct ContentView: View {
         .sheet(isPresented: $isShowingSettings) {
             Settings(mainStore: mainStore, selectedBrewMethod: $selectedBrewMethod)
         }
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
 //        ContentView()
-        ForEach(ColorScheme.allCases, id: \.self, content: ContentView().preferredColorScheme)
+        ForEach(ColorScheme.allCases, id: \.self, content: ContentView( mainStore: Store()).preferredColorScheme)
     }
 }

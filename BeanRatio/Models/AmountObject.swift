@@ -11,12 +11,14 @@ import SwiftUI
 class AmountObject: ObservableObject {
     
     func calculateCoffeeAmount() {
+        var tempCoffee = 0.0
         switch (selectedUnit) {
         case .grams:
-            coffeeAmount = String(format: "%.1f", (Double(waterAmount) ?? 0.0) / Double(brewRatio))
+            tempCoffee = (Double(waterAmount) ?? 0.0) / Double(brewRatio)
         case .ounces:
-            coffeeAmount = String(format: "%.1f", ((Double(waterAmount) ?? 0.0) * 28.3495) / Double(brewRatio))
+            tempCoffee = ((Double(waterAmount) ?? 0.0) * 28.3495) / Double(brewRatio)
         }
+        coffeeAmount = (floor(tempCoffee) == tempCoffee) ? String(Int(tempCoffee)) : String(format: "%.1f", tempCoffee)
     }
     
     @Published var waterAmount: String = "0" {

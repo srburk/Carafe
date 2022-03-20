@@ -10,6 +10,7 @@ import SwiftUI
 struct Settings: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var mainStore: Store
     
     @Binding var selectedBrewMethod: BrewMethod?
@@ -64,14 +65,14 @@ struct Settings: View {
                 
                 // MARK: General Settings
                 Section(header: Text("General")) {
-                    
-                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
-                        Text("Match System Theme").tag(Theme.auto)
-                        Text("Light").tag(Theme.light)
-                        Text("Dark").tag(Theme.dark)
-                            .navigationTitle("Theme")
-                            .navigationBarTitleDisplayMode(.inline)
-                    }
+                                        
+//                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
+//                        Text("Match System Theme").tag(Theme.auto)
+//                        Text("Light").tag(Theme.light)
+//                        Text("Dark").tag(Theme.dark)
+//                            .navigationTitle("Theme")
+//                            .navigationBarTitleDisplayMode(.inline)
+//                    }
                     
                     Picker("Default Units", selection: $mainStore.storage.defaults.defaultUnits) {
                         Text("Grams").tag(Units.grams)
@@ -86,6 +87,7 @@ struct Settings: View {
                         TextField("Enter Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
+                            .foregroundColor(.secondary)
                     }
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -100,11 +102,16 @@ struct Settings: View {
                     NavigationLink("About", destination: Text("About this app"))
                 }
             }
-            .listStyle(.grouped)
+            .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
+                        Store.save(storage: mainStore.storage) { result in
+                            if case .failure(let error) = result {
+                                fatalError(error.localizedDescription)
+                            }
+                        }
                     }) {
                         Text("Done").foregroundColor(.primary)
                     }

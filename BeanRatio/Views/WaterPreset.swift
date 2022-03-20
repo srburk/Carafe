@@ -15,6 +15,8 @@ struct WaterPreset: View {
     // animation for tapping
     @State var tap = false
     
+    @ObservedObject var mainStore: Store
+    
     @Environment(\.colorScheme) var colorScheme
     
     // Cool violet => Color(red: 109/255, green: 109/255, blue: 113)
@@ -46,7 +48,7 @@ struct WaterPreset: View {
             }
         }
         .onTapGesture {
-            waterAmount = String(format: "%.1f", Double(number) * 118)
+            waterAmount = String(Double(number) * (Double(mainStore.storage.defaults.cupGramAmount) ?? 0.0))
             tap = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 tap = false
@@ -61,7 +63,7 @@ struct WaterPreset: View {
 
 struct WaterPreset_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self, content:         WaterPreset(waterAmount: .constant("0"), number: 1)
+        ForEach(ColorScheme.allCases, id: \.self, content:         WaterPreset(waterAmount: .constant("0"), mainStore: Store(), number: 1)
 .preferredColorScheme)
 
     }
