@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  BeanRatio
+//  Carafe
 //
 //  Created by Sam : on 10/21/21.
 //

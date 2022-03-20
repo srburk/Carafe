@@ -1,6 +1,6 @@
 //
-//  BeanRatioApp.swift
-//  BeanRatio
+//  CarafeApp.swift
+//  Carafe
 //
 //  Created by Sam Burkhard on 10/21/21.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct BeanRatioApp: App {
+struct CarafeApp: App {
     
     @StateObject var mainStore = Store()
 

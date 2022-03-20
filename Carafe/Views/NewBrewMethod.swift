@@ -1,6 +1,6 @@
 //
 //  NewBrewMethod.swift
-//  BeanRatio
+//  Carafe
 //
 //  Created by Sam Burkhard on 3/17/22.
 //

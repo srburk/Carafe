@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B0834DC27E3C4650080DEED /* BrewMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0834DB27E3C4650080DEED /* BrewMethod.swift */; };
 		3B0834E027E3D8A20080DEED /* NewBrewMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0834DF27E3D8A20080DEED /* NewBrewMethod.swift */; };
-		3B1C714B2722487A000505BF /* BeanRatioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C714A2722487A000505BF /* BeanRatioApp.swift */; };
+		3B1C714B2722487A000505BF /* CarafeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C714A2722487A000505BF /* CarafeApp.swift */; };
 		3B1C714D2722487A000505BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C714C2722487A000505BF /* ContentView.swift */; };
 		3B1C714F2722487C000505BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1C714E2722487C000505BF /* Assets.xcassets */; };
 		3B1C71522722487C000505BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1C71512722487C000505BF /* Preview Assets.xcassets */; };
@@ -25,7 +25,7 @@
 		3B0834DB27E3C4650080DEED /* BrewMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewMethod.swift; sourceTree = "<group>"; };
 		3B0834DF27E3D8A20080DEED /* NewBrewMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBrewMethod.swift; sourceTree = "<group>"; };
 		3B1C71472722487A000505BF /* Carafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B1C714A2722487A000505BF /* BeanRatioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRatioApp.swift; sourceTree = "<group>"; };
+		3B1C714A2722487A000505BF /* CarafeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarafeApp.swift; sourceTree = "<group>"; };
 		3B1C714C2722487A000505BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B1C714E2722487C000505BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B1C71512722487C000505BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 				3B0834DA27E3C43D0080DEED /* Models */,
 				3B26F21927E2F65A00CD8F44 /* Info.plist */,
 				3BAF91D227E2BE1B00009BD2 /* Views */,
-				3B1C714A2722487A000505BF /* BeanRatioApp.swift */,
+				3B1C714A2722487A000505BF /* CarafeApp.swift */,
 				3B1C714C2722487A000505BF /* ContentView.swift */,
 				3B1C714E2722487C000505BF /* Assets.xcassets */,
 				3B1C71502722487C000505BF /* Preview Content */,
@@ -184,7 +184,7 @@
 				3B26D5AB27E68DAE0097F49B /* History.swift in Sources */,
 				3B1C714D2722487A000505BF /* ContentView.swift in Sources */,
 				3B0834DC27E3C4650080DEED /* BrewMethod.swift in Sources */,
-				3B1C714B2722487A000505BF /* BeanRatioApp.swift in Sources */,
+				3B1C714B2722487A000505BF /* CarafeApp.swift in Sources */,
 				3B26D5AD27E6A0430097F49B /* Store.swift in Sources */,
 				3B0834E027E3D8A20080DEED /* NewBrewMethod.swift in Sources */,
 				3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */,

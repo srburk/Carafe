@@ -1,6 +1,6 @@
 //
 //  Store.swift
-//  BeanRatio
+//  Carafe
 //
 //  Created by Sam Burkhard on 3/19/22.
 //
