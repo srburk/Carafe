@@ -6,8 +6,7 @@
 //
 
 // TODO: 1. Project Name
-//       2. Dark Mode
-//       3. Launch Screen
+//       2. Launch Screen
 
 import SwiftUI
 import UIKit
@@ -71,11 +70,11 @@ struct ContentView: View {
 
                     ZStack {
                         RoundedRectangle(cornerRadius: 45)
-                            .foregroundColor(.white)
+                            .foregroundColor((colorScheme == .light ? Color.white : Color(red: 35/255, green: 35/255, blue: 35/255)))
                             .onTapGesture {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             }
-                            .shadow(color: .gray, radius: 7)
+                            .shadow(color: (colorScheme == .light ? Color.gray : Color(red: 55/255, green: 55/255, blue: 55/255)), radius: 7)
                         
                         VStack() {
                             
@@ -96,7 +95,7 @@ struct ContentView: View {
                                 TextField("Enter Amount", text: $amountObject.waterAmount)
                                     .padding()
                                     .frame(height: 30)
-                                    .background(Color(red: 238/255, green: 238/255, blue: 238/255))
+                                    .background((colorScheme == .light ? Color(red: 238/255, green: 238/255, blue: 238/255) : Color(red: 55/255, green: 55/255, blue: 58/255)))
                                     .cornerRadius(5)
                                     .keyboardType(.decimalPad)
 
@@ -118,7 +117,7 @@ struct ContentView: View {
                             
                             if (!mainStore.storage.history.isEmpty) {
                                 List {
-                                    Section(header: Text("History").font(.headline).foregroundColor(.black)) {
+                                    Section(header: Text("History").font(.headline).foregroundColor(.primary)) {
                                         ForEach(mainStore.storage.history) { history in
                                             Text(String("\(history.amount)g of water"))
                                                 .onTapGesture {
@@ -126,10 +125,11 @@ struct ContentView: View {
                                                 }
                                         }
                                         .onDelete(perform: delete)
+                                        .listRowBackground(colorScheme == .light ? .white : Color(red: 35/255, green: 35/255, blue: 35/255))
                                     }
                                 }
-                                    .background(Color.white)
-                                    .listStyle(.plain)
+                                .background(colorScheme == .light ? .white : Color(red: 35/255, green: 35/255, blue: 35/255))
+                                .listStyle(.plain)
                             } else {
                                 Spacer()
                             }
@@ -218,6 +218,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+//        ContentView()
+        ForEach(ColorScheme.allCases, id: \.self, content: ContentView().preferredColorScheme)
     }
 }

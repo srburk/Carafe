@@ -15,6 +15,10 @@ struct WaterPreset: View {
     // animation for tapping
     @State var tap = false
     
+    @Environment(\.colorScheme) var colorScheme
+    
+    // Cool violet => Color(red: 109/255, green: 109/255, blue: 113)
+
     var number: Int
     
     var body: some View {
@@ -22,6 +26,7 @@ struct WaterPreset: View {
             
             Circle()
                 .frame(width: 100, height: 100)
+                .foregroundColor((colorScheme == .light ? .black : Color(red: 55/255, green: 55/255, blue: 58/255)))
             
             VStack {
                 Image(systemName: "cup.and.saucer.fill")
@@ -56,6 +61,8 @@ struct WaterPreset: View {
 
 struct WaterPreset_Previews: PreviewProvider {
     static var previews: some View {
-        WaterPreset(waterAmount: .constant("0"), number: 1)
+        ForEach(ColorScheme.allCases, id: \.self, content:         WaterPreset(waterAmount: .constant("0"), number: 1)
+.preferredColorScheme)
+
     }
 }

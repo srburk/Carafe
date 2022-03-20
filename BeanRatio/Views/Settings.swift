@@ -48,7 +48,7 @@ struct Settings: View {
                         
                         let systemImage = (selectedBrewMethod?.id == brewMethod.id) ? "checkmark.circle.fill" : "circle"
                         
-                        Label("\(brewMethod.title)", systemImage: systemImage).foregroundColor(.black)
+                        Label("\(brewMethod.title)", systemImage: systemImage).foregroundColor(.primary)
                         
                             .onTapGesture {
                                 selectedBrewMethod = brewMethod
@@ -80,13 +80,24 @@ struct Settings: View {
                             .navigationBarTitleDisplayMode(.inline)
                     }
                     
-                    NavigationLink("About", destination: Text("About this app"))
+                    HStack {
+                        Text("Default Cup Size (g)")
+
+                        TextField("Enter Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
+                            .multilineTextAlignment(.trailing)
+                            .keyboardType(.decimalPad)
+                    }
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                    
                 }
                 
                 // MARK: Feedback and About
                 Section(header: Text("Feedback")) {
                     Link("Email Me", destination: URL(string: "https://www.apple.com")!).foregroundColor(.primary)
                     Link("Twitter", destination: URL(string: "https://www.twitter.com")!).foregroundColor(.primary)
+                    NavigationLink("About", destination: Text("About this app"))
                 }
             }
             .listStyle(.grouped)
@@ -95,7 +106,7 @@ struct Settings: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("Done").foregroundColor(.black)
+                        Text("Done").foregroundColor(.primary)
                     }
                 }
             }

@@ -24,6 +24,7 @@ struct NewBrewMethod: View {
         List {
             Section(header: Text("Name")) {
                 TextField("Brewing Method", text: $title)
+                    .disableAutocorrection(true)
             }
             
             Section(header: Text("Ratio")) {
@@ -46,11 +47,7 @@ struct NewBrewMethod: View {
                         let newBrewMethod = BrewMethod(id: UUID(), title: title, brewRatio: brewRatio)
                         
                         mainStore.storage.brewMethods.append(newBrewMethod)
-//                        BrewMethodStore.save(brewMethods: mainStore.storage.brewMethods) { result in
-//                            if case .failure(let error) = result {
-//                                fatalError(error.localizedDescription)
-//                            }
-//                        }
+                        
                         Store.save(storage: mainStore.storage) { result in
                             if case .failure(let error) = result {
                                 fatalError(error.localizedDescription)
