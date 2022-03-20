@@ -7,14 +7,20 @@
 
 import Foundation
 
+enum Theme : Codable, CaseIterable {
+    case auto, dark, light
+}
+
 struct Defaults : Codable {
     var cupGramAmount: Double
     var defaultUnits: Units
     var defaultBrewMethod: BrewMethod?
+    var themeMode: Theme
     
-    init(cupGramAmount: Double, defaultUnits: Units) {
+    init(cupGramAmount: Double, defaultUnits: Units, themeMode: Theme) {
         self.cupGramAmount = cupGramAmount
         self.defaultUnits = defaultUnits
+        self.themeMode = themeMode
     }
 }
 
@@ -32,7 +38,7 @@ struct Storage : Codable {
 
 class Store: ObservableObject {
     
-    @Published var storage: Storage = Storage(defaults: Defaults(cupGramAmount: 118.0, defaultUnits: .grams), brewMethods: [], history: [])
+    @Published var storage: Storage = Storage(defaults: Defaults(cupGramAmount: 118.0, defaultUnits: .grams, themeMode: .auto), brewMethods: [], history: [])
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("store.data")
@@ -44,7 +50,7 @@ class Store: ObservableObject {
                 let fileURL = try fileURL()
                 guard let file = try? FileHandle(forReadingFrom: fileURL) else {
                     DispatchQueue.main.async {
-                        completion(.success(Storage(defaults: Defaults(cupGramAmount: 118.0, defaultUnits: .grams), brewMethods: [], history: [])))
+                        completion(.success(Storage(defaults: Defaults(cupGramAmount: 118.0, defaultUnits: .grams, themeMode: .auto), brewMethods: [], history: [])))
                     }
                     return
                 }

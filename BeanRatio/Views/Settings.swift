@@ -61,10 +61,32 @@ struct Settings: View {
 
                     NavigationLink("New Method", destination: NewBrewMethod(title: "", brewRatio: 15, mainStore: mainStore, selectedBrewMethod: $selectedBrewMethod, presentationMode: self._presentationMode)).foregroundColor(.blue)
                 }
+                
+                // MARK: General Settings
                 Section(header: Text("General")) {
-                    Text("About")
-                    Text("Default Units")
-                    Text("Appearance")
+                    
+                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
+                        Text("Match System Theme").tag(Theme.auto)
+                        Text("Light").tag(Theme.light)
+                        Text("Dark").tag(Theme.dark)
+                            .navigationTitle("Theme")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                    
+                    Picker("Default Units", selection: $mainStore.storage.defaults.defaultUnits) {
+                        Text("Grams").tag(Units.grams)
+                        Text("Ounces").tag(Units.ounces)
+                            .navigationTitle("Units")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                    
+                    NavigationLink("About", destination: Text("About this app"))
+                }
+                
+                // MARK: Feedback and About
+                Section(header: Text("Feedback")) {
+                    Link("Email Me", destination: URL(string: "https://www.apple.com")!).foregroundColor(.primary)
+                    Link("Twitter", destination: URL(string: "https://www.twitter.com")!).foregroundColor(.primary)
                 }
             }
             .listStyle(.grouped)

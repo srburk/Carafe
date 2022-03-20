@@ -5,6 +5,10 @@
 //  Created by Sam : on 10/21/21.
 //
 
+// TODO: 1. Project Name
+//       2. Dark Mode
+//       3. Launch Screen
+
 import SwiftUI
 import UIKit
 import Combine
@@ -15,25 +19,23 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .clear
     }
     
+    // MARK: Environment Variables
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
+
     // Persistent Store
     @StateObject var mainStore = Store()
     
+    // MARK: States
     @State var brewMethodName = ""
-    
-    @Environment(\.scenePhase) private var scenePhase
-    
-    // keep track of selected BrewMethod
     @State public var selectedBrewMethod: BrewMethod? = nil
+    @State private var isShowingSettings = false
 
     @ObservedObject var amountObject = AmountObject()
-    
-    // MARK: View Layout bindings
-    @State private var isShowingSettings = false
-    
+        
     func delete(at offsets: IndexSet) {
                         
         mainStore.storage.history.remove(atOffsets: offsets)
-        
         
         Store.save(storage: mainStore.storage) { result in
             if case .failure(let error) = result {
