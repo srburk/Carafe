@@ -14,9 +14,8 @@ import Combine
 
 struct ContentView: View {
     
-//    init(mainStore: Store) {
-//        UITableView.appearance().backgroundColor = .clear
-//    }
+    // MARK: App Storage
+    @AppStorage("needsOnboarding") var needsOnboarding: Bool = true
     
     // MARK: Environment Variables
     @Environment(\.colorScheme) var colorScheme
@@ -44,7 +43,7 @@ struct ContentView: View {
     }
             
     var body: some View {
-        return NavigationView {
+        NavigationView {
             ZStack {
                 
                 Rectangle()
@@ -212,6 +211,10 @@ struct ContentView: View {
         
         .sheet(isPresented: $isShowingSettings) {
             Settings(mainStore: mainStore, selectedBrewMethod: $selectedBrewMethod)
+        }
+        
+        .fullScreenCover(isPresented: $needsOnboarding) {
+            Onboarding()
         }
         
     }
