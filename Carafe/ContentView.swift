@@ -178,7 +178,7 @@ struct ContentView: View {
                     }
                 }
             }
-                        
+                                    
         }
         
         .onChange(of: scenePhase) { phase in

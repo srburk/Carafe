@@ -77,8 +77,8 @@ struct Settings: View {
                     Picker("Default Units", selection: $mainStore.storage.defaults.defaultUnits) {
                         Text("Grams").tag(Units.grams)
                         Text("Ounces").tag(Units.ounces)
-                            .navigationTitle("Units")
-                            .navigationBarTitleDisplayMode(.inline)
+//                            .navigationTitle("Units")
+//                            .navigationBarTitleDisplayMode(.inline)
                     }
                     
                     HStack {
