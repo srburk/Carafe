@@ -31,9 +31,9 @@ struct ContentView: View {
     @State private var isShowingSettings = false
     
     func delete(at offsets: IndexSet) {
-                
-//        historyStore.history.remove(atOffsets: offsets)
+                        
         mainStore.storage.history.remove(atOffsets: offsets)
+        
         
         Store.save(storage: mainStore.storage) { result in
             if case .failure(let error) = result {
@@ -70,6 +70,10 @@ struct ContentView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 45)
                             .foregroundColor(.white)
+                            .onTapGesture {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            }
+                            .shadow(color: .gray, radius: 7)
                         
                         VStack() {
                             
@@ -110,19 +114,24 @@ struct ContentView: View {
                             Stepper("1:\(amountObject.brewRatio)", value: $amountObject.brewRatio, in: 1...50, step: 1)
                                 .padding([.leading, .trailing], 15)
                             
-                            List {
-                                Section(header: Text("History").font(.headline).foregroundColor(.black)) {
-                                    ForEach($mainStore.storage.history) { $history in
-                                        Text(String("\(history.amount)g of water"))
-                                            .onTapGesture {
-                                                amountObject.waterAmount = String(history.amount)
-                                            }
+                            if (!mainStore.storage.history.isEmpty) {
+                                List {
+                                    Section(header: Text("History").font(.headline).foregroundColor(.black)) {
+                                        ForEach(mainStore.storage.history) { history in
+                                            Text(String("\(history.amount)g of water"))
+                                                .onTapGesture {
+                                                    amountObject.waterAmount = String(history.amount)
+                                                }
+                                        }
+                                        .onDelete(perform: delete)
                                     }
-                                    .onDelete(perform: delete)
                                 }
+                                    .background(Color.white)
+                                    .listStyle(.plain)
+                            } else {
+                                Spacer()
                             }
-                                .background(Color.white)
-                                .listStyle(.plain)
+                            
                         }
 
                     }

@@ -29,7 +29,7 @@ class AmountObject: ObservableObject {
     
     @Published var brewRatio = 17 {
         didSet {
-            withAnimation {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
                 calculateCoffeeAmount()
             }
         }
@@ -37,7 +37,9 @@ class AmountObject: ObservableObject {
     
     @Published var selectedUnit: Units = .grams {
         didSet {
-            calculateCoffeeAmount()
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
+                calculateCoffeeAmount()
+            }
         }
     }
     
