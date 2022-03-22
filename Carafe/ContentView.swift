@@ -36,14 +36,14 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     // Persistent Store
-    @ObservedObject var mainStore: Store
+    @StateObject var mainStore: Store
     
     // MARK: States
     @State var brewMethodName = ""
     @State public var selectedBrewMethod: BrewMethod? = nil
     @State private var isShowingSettings = false
     
-    @ObservedObject var amountObject = AmountObject()
+    @StateObject var amountObject = AmountObject()
         
     func delete(at offsets: IndexSet) {
                         
@@ -118,6 +118,10 @@ struct ContentView: View {
                                     Text("ounces").tag(Units.ounces)
                                 }
                                     .pickerStyle(.segmented)
+                                    .onAppear {
+                                        print("Default: \(mainStore.storage.defaults.defaultUnits)")
+                                        print("Actual: \(amountObject.selectedUnit)")
+                                    }
                             }
                             .padding([.leading, .trailing], 15)
                             
@@ -128,6 +132,7 @@ struct ContentView: View {
                             
                             Stepper("1:\(amountObject.brewRatio)", value: $amountObject.brewRatio, in: 1...50, step: 1)
                                 .padding([.leading, .trailing], 15)
+                 
                             
                             if (!mainStore.storage.history.isEmpty) {
                                 List {
@@ -166,14 +171,15 @@ struct ContentView: View {
                                 
                                 Text("\(selectedBrewMethod?.title ?? " ")")
                                     .font(.title3)
-                            }.foregroundColor(.white)
+                            }
+                            .foregroundColor(.white)
                         }
-                        
                     }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+        
         .onAppear() {
 
             Store.load { result in
@@ -191,10 +197,13 @@ struct ContentView: View {
                         selectedBrewMethod = (mainStore.storage.brewMethods.count == 0) ? nil : mainStore.storage.brewMethods.first
                     }
                     
-                    mainStore.storage.defaults.defaultUnits = storage.defaults.defaultUnits
+//                    mainStore.storage.defaults.defaultUnits = storage.defaults.defaultUnits
 
                 }
             }
+            
+            amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
+            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 17
                                     
         }
         
@@ -219,16 +228,19 @@ struct ContentView: View {
                     }
                 }
                 
+            } else if phase == .active {
+                amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 17
+                amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
             }
                 
         }
         
-        .onChange(of: selectedBrewMethod?.brewRatio) { _ in
-            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 15
-        }
+//        .onChange(of: selectedBrewMethod?.brewRatio) { _ in
+//            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 15
+//        }
         
         .sheet(isPresented: $isShowingSettings) {
-            Settings(mainStore: mainStore, selectedBrewMethod: $selectedBrewMethod)
+            Settings(mainStore: mainStore, amountObject: amountObject, selectedBrewMethod: $selectedBrewMethod)
         }
         
         .fullScreenCover(isPresented: $needsOnboarding) {

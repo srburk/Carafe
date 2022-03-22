@@ -11,7 +11,11 @@ struct Settings: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var mainStore: Store
+    
+    @StateObject var mainStore: Store
+    @StateObject var amountObject: AmountObject
+    
+    @AppStorage("hapticsOn") var hapticsOn: Bool = true
     
     @Binding var selectedBrewMethod: BrewMethod?
     
@@ -45,16 +49,22 @@ struct Settings: View {
         NavigationView {
             List {
                 Section(header: Text("Brewing Method")) {
+                    
                     ForEach($mainStore.storage.brewMethods) { $brewMethod in
                         
                         let systemImage = (selectedBrewMethod?.id == brewMethod.id) ? "checkmark.circle.fill" : "circle"
                         
-                        Label("\(brewMethod.title)", systemImage: systemImage).foregroundColor(.primary)
-                        
-                            .onTapGesture {
-                                selectedBrewMethod = brewMethod
-                                mainStore.storage.defaults.defaultBrewMethod = selectedBrewMethod
-                            }
+                        HStack {
+                            Label("\(brewMethod.title)", systemImage: systemImage).foregroundColor(.primary)
+                            Spacer()
+                            Text("1:\(brewMethod.brewRatio)")
+                                .foregroundColor(.secondary)
+                        }
+                        .onTapGesture {
+                            selectedBrewMethod = brewMethod
+                            mainStore.storage.defaults.defaultBrewMethod = selectedBrewMethod
+                            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 17
+                        }
                         
                     }
                     
@@ -64,7 +74,7 @@ struct Settings: View {
                 }
                 
                 // MARK: General Settings
-                Section(header: Text("Units")) {
+                Section(header: Text("Preferences")) {
                                         
 //                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
 //                        Text("Match System Theme").tag(Theme.auto)
@@ -73,7 +83,7 @@ struct Settings: View {
 //                            .navigationTitle("Theme")
 //                            .navigationBarTitleDisplayMode(.inline)
 //                    }
-                    
+                                        
                     Picker(selection: $mainStore.storage.defaults.defaultUnits, label: Label("Default Units", systemImage: "scalemass").foregroundColor(.primary)) {
                         Text("Grams").tag(Units.grams)
                         Text("Ounces").tag(Units.ounces)
@@ -95,6 +105,8 @@ struct Settings: View {
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
+                    
+                    Toggle("Haptic Feedback", isOn: $hapticsOn)
                     
                 }
                 
@@ -137,12 +149,22 @@ struct Settings: View {
             }
             .navigationTitle("Settings")
         }
+        .onDisappear {
+            print("Default: \(mainStore.storage.defaults.defaultUnits)")
+            print("Actual: \(amountObject.selectedUnit)")
+            Store.save(storage: mainStore.storage) { result in
+                if case .failure(let error) = result {
+                    fatalError(error.localizedDescription)
+                }
+            }
+            amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
+        }
     }
 }
 
 struct Settings_Previews: PreviewProvider {
     
     static var previews: some View {
-        Settings(mainStore: Store(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
+        Settings(mainStore: Store(), amountObject: AmountObject(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }

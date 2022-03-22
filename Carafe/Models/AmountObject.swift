@@ -29,7 +29,7 @@ class AmountObject: ObservableObject {
         }
     }
     
-    @Published var brewRatio = 17 {
+    @Published var brewRatio: Int = 17{
         didSet {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
                 calculateCoffeeAmount()
@@ -46,4 +46,9 @@ class AmountObject: ObservableObject {
     }
     
     @Published var coffeeAmount: String = "0"
+//
+//    init(brewRatio: Int) {
+//        self.brewRatio = brewRatio
+//    }
+    
 }

@@ -17,6 +17,8 @@ struct WaterPreset: View {
     
     @ObservedObject var mainStore: Store
     
+    @AppStorage("hapticsOn") var hapticsOn: Bool = true
+    
     @Environment(\.colorScheme) var colorScheme
     
     // Cool violet => Color(red: 109/255, green: 109/255, blue: 113)
@@ -48,6 +50,10 @@ struct WaterPreset: View {
             }
         }
         .onTapGesture {
+            if (hapticsOn) {
+                let impact = UIImpactFeedbackGenerator(style: .light)
+                impact.impactOccurred()
+            }
             waterAmount = String(Double(number) * (Double(mainStore.storage.defaults.cupGramAmount) ?? 0.0))
             tap = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
