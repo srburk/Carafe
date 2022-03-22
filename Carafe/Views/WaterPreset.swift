@@ -12,6 +12,8 @@ struct WaterPreset: View {
     // Binding passed from parent
     @Binding var waterAmount: String
     
+    @StateObject var amountObject: AmountObject
+    
     // animation for tapping
     @State var tap = false
     
@@ -23,7 +25,7 @@ struct WaterPreset: View {
     
     // Cool violet => Color(red: 109/255, green: 109/255, blue: 113)
 
-    var number: Int
+    var number: Double
     
     var body: some View {
         ZStack {
@@ -36,17 +38,11 @@ struct WaterPreset: View {
                 Image(systemName: "cup.and.saucer.fill")
                     .foregroundColor(.white)
                     .font(.system(size: 35))
-                if (number == 1) {
-                    Text("1 cup")
-                        .foregroundColor(.white)
-                        .font(.subheadline)
-                        .padding(1)
-                } else {
-                    Text("\(number) cups")
-                        .foregroundColor(.white)
-                        .font(.subheadline)
-                        .padding(1)
-                }
+                
+                Text("\(String(format: "%.0f", (number))) \((mainStore.storage.defaults.defaultUnits == .grams) ? "g" : "oz")")
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .padding(1)
             }
         }
         .onTapGesture {
@@ -54,7 +50,9 @@ struct WaterPreset: View {
                 let impact = UIImpactFeedbackGenerator(style: .light)
                 impact.impactOccurred()
             }
-            waterAmount = String(Double(number) * (Double(mainStore.storage.defaults.cupGramAmount) ?? 0.0))
+            amountObject.waterAmount = String(number)
+            amountObject.calculateCoffeeAmount()
+//            waterAmount = String(Double(number) * (Double(mainStore.storage.defaults.cupGramAmount) ?? 0.0))
             tap = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 tap = false
@@ -69,7 +67,7 @@ struct WaterPreset: View {
 
 struct WaterPreset_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self, content:         WaterPreset(waterAmount: .constant("0"), mainStore: Store(), number: 1)
+        ForEach(ColorScheme.allCases, id: \.self, content:         WaterPreset(waterAmount: .constant("0"), amountObject: AmountObject(), mainStore: Store(), number: 300.0)
 .preferredColorScheme)
 
     }

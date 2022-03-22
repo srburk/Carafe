@@ -17,6 +17,10 @@ struct Settings: View {
     
     @AppStorage("hapticsOn") var hapticsOn: Bool = true
     
+    @AppStorage("waterPreset1") var waterPreset1: Double = 350;
+    @AppStorage("waterPreset2") var waterPreset2: Double = 450;
+    @AppStorage("waterPreset3") var waterPreset3: Double = 600;
+    
     @Binding var selectedBrewMethod: BrewMethod?
     
     func delete(at offsets: IndexSet) {
@@ -89,32 +93,47 @@ struct Settings: View {
                         Text("Ounces").tag(Units.ounces)
                     }
                     
-                    HStack {
-                        Label("Cup Size", systemImage: "cup.and.saucer").foregroundColor(.primary)
-                        
-                        TextField("Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
-                            .multilineTextAlignment(.trailing)
-                            .keyboardType(.decimalPad)
-                            .foregroundColor(.secondary)
-                        
+//                    HStack {
+//                        Label("Cup Size", systemImage: "cup.and.saucer").foregroundColor(.primary)
+//
 //                        TextField("Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
 //                            .multilineTextAlignment(.trailing)
 //                            .keyboardType(.decimalPad)
-//                            .foregroundColor(.secondary)
-                    }
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
+//                            .foregroundColor(.secondary300
+//                    }
+                    
+                    NavigationLink(destination: {
+                        List {
+                            Section(header: Text("Preset 1")) {
+                                TextField("Water Preset", value: $waterPreset1, formatter: NumberFormatter())
+                                .keyboardType(.decimalPad)
+                            }
+                            Section(header: Text("Preset 12")) {
+                                TextField("Water Preset", value: $waterPreset2, formatter: NumberFormatter())
+                                .keyboardType(.decimalPad)
+                            }
+                            Section(header: Text("Preset 2")) {
+                                TextField("Water Preset", value: $waterPreset3, formatter: NumberFormatter())
+                                .keyboardType(.decimalPad)
+                            }
+                        }
+                        .navigationBarTitle("Water Presets")
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                    }) {
+                        Label("Water Presets", systemImage: "drop")
+                    }.foregroundColor(.primary)
                     
                     Toggle("Haptic Feedback", isOn: $hapticsOn)
                     
                 }
-                
-                // MARK: Presets
-                Section(header: Text("Presets")) {
-                    Label("Water Presets", systemImage: "drop").foregroundColor(.primary)
-                    Label("Preset 2", systemImage: "2.circle").foregroundColor(.primary)
-                }
+//
+//                // MARK: Presets
+//                Section(header: Text("Presets")) {
+//                    Label("Water Presets", systemImage: "drop").foregroundColor(.primary)
+//                    Label("Preset 2", systemImage: "2.circle").foregroundColor(.primary)
+//                }
                 
                 // MARK: Feedback and About
                 Section(header: Text("More")) {

@@ -30,6 +30,9 @@ struct ContentView: View {
     
     // MARK: App Storage
     @AppStorage("needsOnboarding") var needsOnboarding: Bool = true
+    @AppStorage("waterPreset1") var waterPreset1: Double = 350;
+    @AppStorage("waterPreset2") var waterPreset2: Double = 450;
+    @AppStorage("waterPreset3") var waterPreset3: Double = 600;
     
     // MARK: Environment Variables
     @Environment(\.colorScheme) var colorScheme
@@ -93,9 +96,12 @@ struct ContentView: View {
                         VStack() {
                             
                             HStack(spacing: 25) {
-                                ForEach(1..<4) { index in
-                                    WaterPreset(waterAmount: $amountObject.waterAmount, mainStore: mainStore, number: index)
-                                }
+//                                ForEach(1..<4) { index in
+//                                    WaterPreset(waterAmount: $amountObject.waterAmount, mainStore: mainStore, number: index)
+//                                }
+                                WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset1)
+                                WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset2)
+                                WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset3)
                             }
                             .padding(.top, 25)
 
@@ -138,7 +144,7 @@ struct ContentView: View {
                                 List {
                                     Section(header: Text("History").font(.headline).foregroundColor(.primary)) {
                                         ForEach(mainStore.storage.history) { history in
-                                            Text(String("\(history.amount)g of water"))
+                                            Text("\(String(format: "%.0f", (history.amount))) \((mainStore.storage.defaults.defaultUnits == .grams) ? "g" : "oz")")
                                                 .onTapGesture {
                                                     amountObject.waterAmount = String(history.amount)
                                                 }

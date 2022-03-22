@@ -36,7 +36,7 @@ struct NewBrewMethod: View {
                 isActive = true
             }
         }
-        .listStyle(.grouped)
+        .listStyle(.insetGrouped)
         .navigationTitle("New Method")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
