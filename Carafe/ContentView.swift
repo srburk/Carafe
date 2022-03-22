@@ -124,10 +124,7 @@ struct ContentView: View {
                                     Text("ounces").tag(Units.ounces)
                                 }
                                     .pickerStyle(.segmented)
-                                    .onAppear {
-                                        print("Default: \(mainStore.storage.defaults.defaultUnits)")
-                                        print("Actual: \(amountObject.selectedUnit)")
-                                    }
+      
                             }
                             .padding([.leading, .trailing], 15)
                             

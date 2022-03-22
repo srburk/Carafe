@@ -23,6 +23,10 @@ struct Settings: View {
     
     @Binding var selectedBrewMethod: BrewMethod?
     
+    // MARK: Feedback Info
+    let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+    let appVersion = "1.0"
+    
     func delete(at offsets: IndexSet) {
                 
         offsets.forEach { index in
@@ -144,9 +148,14 @@ struct Settings: View {
                         Label("Help", systemImage: "questionmark.circle")
                     }.foregroundColor(.primary)
                     
-                    Link(destination: URL(string: "https://www.apple.com")!) {
-                        Label("Send Feedback", systemImage: "envelope")
-                    }.foregroundColor(.primary)
+//                    Link(destination: URL(string: "mailto:burkhas4@mail.uc.edu")!) {
+//                        Label("Send Feedback", systemImage: "envelope")
+//                    }.foregroundColor(.primary)
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: "mailto:burkhas4@mail.uc.edu?subject=Carafe%20Feedback&body=%0D%0A%0D%0A---------------%0D%0AOS%3A%20\(UIDevice.current.systemName)%20\(UIDevice.current.systemVersion)%0D%0ADevice%3A%20\(UIDevice.current.localizedModel)%0D%0AApp%20Version%3A%20\(appName)%20\(appVersion)")!)
+                    }) {
+                        Label("Send Feedback", systemImage: "envelope").foregroundColor(.primary)
+                    }
                     
                     NavigationLink(destination: About()) {
                         Label("About", systemImage: "info.circle")
@@ -171,8 +180,7 @@ struct Settings: View {
             .navigationTitle("Settings")
         }
         .onDisappear {
-            print("Default: \(mainStore.storage.defaults.defaultUnits)")
-            print("Actual: \(amountObject.selectedUnit)")
+   
             Store.save(storage: mainStore.storage) { result in
                 if case .failure(let error) = result {
                     fatalError(error.localizedDescription)
