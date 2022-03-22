@@ -125,7 +125,9 @@ struct Settings: View {
                         Label("Water Presets", systemImage: "drop")
                     }.foregroundColor(.primary)
                     
-                    Toggle("Haptic Feedback", isOn: $hapticsOn)
+                    Toggle(isOn: $hapticsOn) {
+                        Label("Haptic Feedback", systemImage: "hand.tap")
+                    }.foregroundColor(.primary)
                     
                 }
 //
@@ -146,7 +148,7 @@ struct Settings: View {
                         Label("Send Feedback", systemImage: "envelope")
                     }.foregroundColor(.primary)
                     
-                    NavigationLink(destination: Text("About this app")) {
+                    NavigationLink(destination: About()) {
                         Label("About", systemImage: "info.circle")
                     }.foregroundColor(.primary)
                 }
