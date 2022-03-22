@@ -22,12 +22,12 @@ struct NewBrewMethod: View {
     
     var body: some View {
         List {
-            Section(header: Text("Name")) {
+            Section(header: Text("Name"), footer: Text("Add something like \"Chemex\" or \"Hario V60\"")) {
                 TextField("Brewing Method", text: $title)
                     .disableAutocorrection(true)
             }
             
-            Section(header: Text("Ratio")) {
+            Section(header: Text("Ratio"), footer: Text("Enter your preferred ratio for this brewing method")) {
                 Stepper("1:\(brewRatio)", value: $brewRatio, in: 1...50, step: 1)
             }
         }

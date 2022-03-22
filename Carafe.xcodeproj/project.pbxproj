@@ -14,6 +14,7 @@
 		3B1C714F2722487C000505BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1C714E2722487C000505BF /* Assets.xcassets */; };
 		3B1C71522722487C000505BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1C71512722487C000505BF /* Preview Assets.xcassets */; };
 		3B1E3FE527E9772300B5B488 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E3FE427E9772300B5B488 /* About.swift */; };
+		3B1E3FE727E97F1000B5B488 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E3FE627E97F1000B5B488 /* Help.swift */; };
 		3B26D5AB27E68DAE0097F49B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AA27E68DAE0097F49B /* History.swift */; };
 		3B26D5AD27E6A0430097F49B /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AC27E6A0430097F49B /* Store.swift */; };
 		3B26D5AF27E6AB000097F49B /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AE27E6AB000097F49B /* Units.swift */; };
@@ -32,6 +33,7 @@
 		3B1C714E2722487C000505BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B1C71512722487C000505BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3B1E3FE427E9772300B5B488 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
+		3B1E3FE627E97F1000B5B488 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 		3B26D5AA27E68DAE0097F49B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3B26D5AC27E6A0430097F49B /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		3B26D5AE27E6AB000097F49B /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				3B0834DF27E3D8A20080DEED /* NewBrewMethod.swift */,
 				3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */,
 				3B1E3FE427E9772300B5B488 /* About.swift */,
+				3B1E3FE627E97F1000B5B488 /* Help.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				3B4A533027E7BC1800D8E5E1 /* Onboarding.swift in Sources */,
 				3B1C714B2722487A000505BF /* CarafeApp.swift in Sources */,
 				3B26D5AD27E6A0430097F49B /* Store.swift in Sources */,
+				3B1E3FE727E97F1000B5B488 /* Help.swift in Sources */,
 				3B0834E027E3D8A20080DEED /* NewBrewMethod.swift in Sources */,
 				3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */,
 				3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */,

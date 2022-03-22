@@ -108,15 +108,15 @@ struct Settings: View {
                     
                     NavigationLink(destination: {
                         List {
-                            Section(header: Text("Preset 1")) {
+                            Section(header: Text("Preset 1"), footer: Text("Water presets use your default units")) {
                                 TextField("Water Preset", value: $waterPreset1, formatter: NumberFormatter())
                                 .keyboardType(.decimalPad)
                             }
-                            Section(header: Text("Preset 12")) {
+                            Section(header: Text("Preset 12"), footer: Text("Water presets use your default units")) {
                                 TextField("Water Preset", value: $waterPreset2, formatter: NumberFormatter())
                                 .keyboardType(.decimalPad)
                             }
-                            Section(header: Text("Preset 2")) {
+                            Section(header: Text("Preset 2"), footer: Text("Water presets use your default units")) {
                                 TextField("Water Preset", value: $waterPreset3, formatter: NumberFormatter())
                                 .keyboardType(.decimalPad)
                             }
@@ -144,7 +144,7 @@ struct Settings: View {
                 // MARK: Feedback and About
                 Section(header: Text("More")) {
                     
-                    NavigationLink(destination: Text("Helo")) {
+                    NavigationLink(destination: Help()) {
                         Label("Help", systemImage: "questionmark.circle")
                     }.foregroundColor(.primary)
                     
