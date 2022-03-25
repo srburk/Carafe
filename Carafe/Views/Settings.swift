@@ -56,7 +56,7 @@ struct Settings: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Brewing Method")) {
+                Section(header: Text("Brewing Methods"), footer: Text("Save ratios for your favorite brewing methods")) {
                     
                     ForEach($mainStore.storage.brewMethods) { $brewMethod in
                         
@@ -84,27 +84,10 @@ struct Settings: View {
                 // MARK: General Settings
                 Section(header: Text("Preferences")) {
                                         
-//                    Picker("Theme", selection: $mainStore.storage.defaults.themeMode) {
-//                        Text("Match System Theme").tag(Theme.auto)
-//                        Text("Light").tag(Theme.light)
-//                        Text("Dark").tag(Theme.dark)
-//                            .navigationTitle("Theme")
-//                            .navigationBarTitleDisplayMode(.inline)
-//                    }
-                                        
                     Picker(selection: $mainStore.storage.defaults.defaultUnits, label: Label("Default Units", systemImage: "scalemass").foregroundColor(.primary)) {
                         Text("Grams").tag(Units.grams)
                         Text("Ounces").tag(Units.ounces)
                     }
-                    
-//                    HStack {
-//                        Label("Cup Size", systemImage: "cup.and.saucer").foregroundColor(.primary)
-//
-//                        TextField("Cup Size", text: $mainStore.storage.defaults.cupGramAmount)
-//                            .multilineTextAlignment(.trailing)
-//                            .keyboardType(.decimalPad)
-//                            .foregroundColor(.secondary300
-//                    }
                     
                     NavigationLink(destination: {
                         List {
@@ -134,12 +117,6 @@ struct Settings: View {
                     }.foregroundColor(.primary)
                     
                 }
-//
-//                // MARK: Presets
-//                Section(header: Text("Presets")) {
-//                    Label("Water Presets", systemImage: "drop").foregroundColor(.primary)
-//                    Label("Preset 2", systemImage: "2.circle").foregroundColor(.primary)
-//                }
                 
                 // MARK: Feedback and About
                 Section(header: Text("More")) {
@@ -148,18 +125,21 @@ struct Settings: View {
                         Label("Help", systemImage: "questionmark.circle")
                     }.foregroundColor(.primary)
                     
-//                    Link(destination: URL(string: "mailto:burkhas4@mail.uc.edu")!) {
-//                        Label("Send Feedback", systemImage: "envelope")
-//                    }.foregroundColor(.primary)
                     Button(action: {
-                        UIApplication.shared.open(URL(string: "mailto:burkhas4@mail.uc.edu?subject=Carafe%20Feedback&body=%0D%0A%0D%0A---------------%0D%0AOS%3A%20\(UIDevice.current.systemName)%20\(UIDevice.current.systemVersion)%0D%0ADevice%3A%20\(UIDevice.current.localizedModel)%0D%0AApp%20Version%3A%20\(appName)%20\(appVersion)")!)
+                        UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/carafe/id1615607237")!)
                     }) {
-                        Label("Send Feedback", systemImage: "envelope").foregroundColor(.primary)
+                        Label("Rate App", systemImage: "star").foregroundColor(.primary)
                     }
                     
                     NavigationLink(destination: About()) {
                         Label("About", systemImage: "info.circle")
                     }.foregroundColor(.primary)
+                    
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: "mailto:burkhas4@mail.uc.edu?subject=Carafe%20Feedback&body=%0D%0A%0D%0A---------------%0D%0AOS%3A%20\(UIDevice.current.systemName)%20\(UIDevice.current.systemVersion)%0D%0ADevice%3A%20\(UIDevice.current.localizedModel)%0D%0AApp%20Version%3A%20\(appName)%20\(appVersion)")!)
+                    }) {
+                        Label("Send Feedback", systemImage: "envelope").foregroundColor(.primary)
+                    }
                 }
             }
             .listStyle(.insetGrouped)

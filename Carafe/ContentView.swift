@@ -46,6 +46,11 @@ struct ContentView: View {
     @State public var selectedBrewMethod: BrewMethod? = nil
     @State private var isShowingSettings = false
     
+    // MARK: TESTING SHEET SWIPING
+    @State var bottomSheetHeight = 75
+//    @State var bottomSheetHeight = 550
+    @State var showingTimerView = true
+    
     @StateObject var amountObject = AmountObject()
         
     func delete(at offsets: IndexSet) {
@@ -69,41 +74,89 @@ struct ContentView: View {
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
-                
+                                
                 VStack {
-                                        
-                    Text(amountObject.coffeeAmount)
-                        .foregroundColor(.white)
-                        .font(.system(size: 100, weight: .semibold))
                     
-                    Text("grams of coffee")
-                        .foregroundColor(.white)
-                        .font(.system(size: 25, weight: .regular))
-                        .padding(.bottom, 25)
+                    // MARK: Stopwatch View
+                    if (showingTimerView) {
+                        
+                        VStack {
+                            
+                            Text("3:00").font(.system(size: 110, weight: .medium)).foregroundColor(.white)
+                                .padding(.bottom, 1)
+                            
+                            Button(action: {
+                                print("Started Timer")
+                            }) {
+                                ZStack {
+                                    Circle()
+                                        .frame(width: 100, height: 100)
+                                        .foregroundColor(Color(red: 55/255, green: 55/255, blue: 58/255))
+                                    
+                                    Text("Start").foregroundColor(.blue)
+                                }
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Text(amountObject.coffeeAmount + " grams of coffee")
+                            .foregroundColor(.white)
+                            .font(.system(size: 25, weight: .medium))
+                            .padding(.bottom, 150)
+                    } else {
+                        
+                        Text(amountObject.coffeeAmount)
+                            .foregroundColor(.white)
+                            .font(.system(size: 100, weight: .semibold))
+                        
+                        Text("grams of coffee")
+                            .foregroundColor(.white)
+                            .font(.system(size: 25, weight: .regular))
+                            .padding(.bottom, 25)
+                        
+                        Spacer()
+                    }
                     
                     
-                    Spacer()
-
+                        
                     ZStack {
+                        
                         Rectangle()
                             .foregroundColor((colorScheme == .light ? Color.white : Color(red: 35/255, green: 35/255, blue: 35/255)))
                             .onTapGesture {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             }
+                            .gesture(DragGesture(minimumDistance: 35).onEnded { _ in
+                                
+                                withAnimation(.spring(response: 0.35)) {
+                                    if (bottomSheetHeight == 75) {
+                                        bottomSheetHeight = 550
+                                        showingTimerView = false
+                                    } else {
+                                        bottomSheetHeight = 75
+                                        showingTimerView = true
+                                    }
+                                }
+                            })
                             .shadow(color: (colorScheme == .light ? Color.gray : Color(red: 55/255, green: 55/255, blue: 55/255)), radius: 7)
                             .cornerRadius(45, corners: [.topLeft, .topRight])
                         
                         VStack() {
                             
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.gray)
+                                .frame(width: 150,height: 3)
+                                .padding()
+                            
                             HStack(spacing: 25) {
-//                                ForEach(1..<4) { index in
-//                                    WaterPreset(waterAmount: $amountObject.waterAmount, mainStore: mainStore, number: index)
-//                                }
+
                                 WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset1)
                                 WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset2)
                                 WaterPreset(waterAmount: $amountObject.waterAmount, amountObject: amountObject, mainStore: mainStore, number: waterPreset3)
+                                
                             }
-                            .padding(.top, 25)
+//                            .padding(.top, 25)
 
                             Text("Water Amount")
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -155,12 +208,11 @@ struct ContentView: View {
                             } else {
                                 Spacer()
                             }
-                            
                         }
 
                     }
                     .ignoresSafeArea(.all)
-                    
+                    .frame(height: CGFloat(bottomSheetHeight))
                 }
                 
                 .toolbar {
@@ -200,8 +252,6 @@ struct ContentView: View {
                         selectedBrewMethod = (mainStore.storage.brewMethods.count == 0) ? nil : mainStore.storage.brewMethods.first
                     }
                     
-//                    mainStore.storage.defaults.defaultUnits = storage.defaults.defaultUnits
-
                 }
             }
             
@@ -238,10 +288,6 @@ struct ContentView: View {
                 
         }
         
-//        .onChange(of: selectedBrewMethod?.brewRatio) { _ in
-//            amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 15
-//        }
-        
         .sheet(isPresented: $isShowingSettings) {
             Settings(mainStore: mainStore, amountObject: amountObject, selectedBrewMethod: $selectedBrewMethod)
         }
@@ -255,7 +301,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        ContentView()
         ForEach(ColorScheme.allCases, id: \.self, content: ContentView( mainStore: Store()).preferredColorScheme)
     }
 }

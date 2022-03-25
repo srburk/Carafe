@@ -44,7 +44,7 @@ struct Onboarding: View {
                 }) {
                     
                     ZStack {
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: 15)
                             .frame(height: 50)
                             .foregroundColor(.white)
                         Text("Get Started")

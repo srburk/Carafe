@@ -33,7 +33,6 @@ struct WaterPreset: View {
             Circle()
                 .frame(width: 100, height: 100)
                 .foregroundColor((colorScheme == .light ? .black : Color(red: 55/255, green: 55/255, blue: 58/255)))
-            
             VStack {
                 Image(systemName: "cup.and.saucer.fill")
                     .foregroundColor(.white)
@@ -44,6 +43,7 @@ struct WaterPreset: View {
                     .font(.subheadline)
                     .padding(1)
             }
+            
         }
         .onTapGesture {
             if (hapticsOn) {
@@ -52,7 +52,7 @@ struct WaterPreset: View {
             }
             amountObject.waterAmount = String(number)
             amountObject.calculateCoffeeAmount()
-//            waterAmount = String(Double(number) * (Double(mainStore.storage.defaults.cupGramAmount) ?? 0.0))
+
             tap = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 tap = false
