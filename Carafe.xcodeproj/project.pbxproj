@@ -20,6 +20,7 @@
 		3B26D5AF27E6AB000097F49B /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5AE27E6AB000097F49B /* Units.swift */; };
 		3B26D5B127E6AB190097F49B /* AmountObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5B027E6AB190097F49B /* AmountObject.swift */; };
 		3B4A533027E7BC1800D8E5E1 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */; };
+		3B7CA9B827EE69980089277B /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7CA9B727EE69980089277B /* Stopwatch.swift */; };
 		3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */; };
 		3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D527E2C95100009BD2 /* Settings.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		3B26D5B027E6AB190097F49B /* AmountObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountObject.swift; sourceTree = "<group>"; };
 		3B26F21927E2F65A00CD8F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		3B7CA9B727EE69980089277B /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */,
 				3B1E3FE427E9772300B5B488 /* About.swift */,
 				3B1E3FE627E97F1000B5B488 /* Help.swift */,
+				3B7CA9B727EE69980089277B /* Stopwatch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				3B26D5AF27E6AB000097F49B /* Units.swift in Sources */,
 				3B26D5AB27E68DAE0097F49B /* History.swift in Sources */,
 				3B1C714D2722487A000505BF /* ContentView.swift in Sources */,
+				3B7CA9B827EE69980089277B /* Stopwatch.swift in Sources */,
 				3B0834DC27E3C4650080DEED /* BrewMethod.swift in Sources */,
 				3B4A533027E7BC1800D8E5E1 /* Onboarding.swift in Sources */,
 				3B1C714B2722487A000505BF /* CarafeApp.swift in Sources */,

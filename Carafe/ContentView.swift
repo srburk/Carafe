@@ -80,23 +80,8 @@ struct ContentView: View {
                     // MARK: Stopwatch View
                     if (showingTimerView) {
                         
-                        VStack {
-                            
-                            Text("3:00").font(.system(size: 110, weight: .medium)).foregroundColor(.white)
-                                .padding(.bottom, 1)
-                            
-                            Button(action: {
-                                print("Started Timer")
-                            }) {
-                                ZStack {
-                                    Circle()
-                                        .frame(width: 100, height: 100)
-                                        .foregroundColor(Color(red: 55/255, green: 55/255, blue: 58/255))
-                                    
-                                    Text("Start").foregroundColor(.blue)
-                                }
-                            }
-                        }
+                        Stopwatch()
+                            .padding(.top, 50)
                         
                         Spacer()
                         
@@ -228,6 +213,24 @@ struct ContentView: View {
                                     .font(.title3)
                             }
                             .foregroundColor(.white)
+                        }
+                    }
+                    
+                    // MARK: Toolbar changes
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        
+                        Button(action: {
+                            withAnimation(.spring(response: 0.35)) {
+                                if (bottomSheetHeight == 75) {
+                                    bottomSheetHeight = 550
+                                    showingTimerView = false
+                                } else {
+                                    bottomSheetHeight = 75
+                                    showingTimerView = true
+                                }
+                            }
+                        }) {
+                            Image(systemName: "timer").foregroundColor(.white)
                         }
                     }
                 }
