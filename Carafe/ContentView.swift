@@ -33,6 +33,15 @@ struct ContentView: View {
     @AppStorage("waterPreset1") var waterPreset1: Double = 350;
     @AppStorage("waterPreset2") var waterPreset2: Double = 450;
     @AppStorage("waterPreset3") var waterPreset3: Double = 600;
+    @AppStorage("useDarkMode") var useDarkMode: Bool = false
+    
+    func customPrimary() -> Color {
+        if (useDarkMode || colorScheme == .dark) {
+            return Color.white
+        } else {
+            return Color.black
+        }
+    }
     
     // MARK: Environment Variables
     @Environment(\.colorScheme) var colorScheme
@@ -48,9 +57,8 @@ struct ContentView: View {
     @State private var isShowingSettings = false
     
     // MARK: TESTING SHEET SWIPING
-    @State var bottomSheetHeight = 75
-//    @State var bottomSheetHeight = 550
-    @State var showingTimerView = true
+    @State var bottomSheetHeight = 550
+    @State var showingTimerView = false
     
     @StateObject var amountObject = AmountObject()
         
