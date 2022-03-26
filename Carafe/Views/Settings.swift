@@ -14,6 +14,7 @@ struct Settings: View {
     
     @StateObject var mainStore: Store
     @StateObject var amountObject: AmountObject
+    @StateObject var timerObject: TimerObject
     
     @AppStorage("hapticsOn") var hapticsOn: Bool = true
     
@@ -159,6 +160,13 @@ struct Settings: View {
             }
             .navigationTitle("Settings")
         }
+        
+        .onChange(of: selectedBrewMethod?.title) { newValue in
+            amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
+            timerObject.totalTime = selectedBrewMethod?.timerAmount ?? 180
+            timerObject.timeRemaining = selectedBrewMethod?.timerAmount ?? 180
+        }
+        
         .onDisappear {
    
             Store.save(storage: mainStore.storage) { result in
@@ -166,7 +174,6 @@ struct Settings: View {
                     fatalError(error.localizedDescription)
                 }
             }
-            amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
         }
     }
 }
@@ -174,6 +181,6 @@ struct Settings: View {
 struct Settings_Previews: PreviewProvider {
     
     static var previews: some View {
-        Settings(mainStore: Store(), amountObject: AmountObject(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
+        Settings(mainStore: Store(), amountObject: AmountObject(), timerObject: TimerObject(), selectedBrewMethod: .constant(BrewMethod(id: UUID(), title: "Chemex", brewRatio: 17)))
     }
 }

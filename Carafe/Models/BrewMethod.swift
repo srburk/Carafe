@@ -11,10 +11,12 @@ struct BrewMethod: Identifiable, Codable {
     let id: UUID
     var title: String
     var brewRatio: Int
+    var timerAmount: Int? // time in seconds
     
-    init(id: UUID = UUID(), title: String, brewRatio: Int) {
+    init(id: UUID = UUID(), title: String, brewRatio: Int, timerAmount: Int = 180) {
         self.id = id
         self.title = title
         self.brewRatio = brewRatio
+        self.timerAmount = timerAmount
     }
 }
