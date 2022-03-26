@@ -21,6 +21,7 @@
 		3B26D5B127E6AB190097F49B /* AmountObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5B027E6AB190097F49B /* AmountObject.swift */; };
 		3B4A533027E7BC1800D8E5E1 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */; };
 		3B7CA9B827EE69980089277B /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7CA9B727EE69980089277B /* Stopwatch.swift */; };
+		3BA620D427EEDBF10004A63E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3BA620D327EEDBF10004A63E /* README.md */; };
 		3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */; };
 		3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D527E2C95100009BD2 /* Settings.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		3B26F21927E2F65A00CD8F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		3B7CA9B727EE69980089277B /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		3BA620D327EEDBF10004A63E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 		3B1C713E2722487A000505BF = {
 			isa = PBXGroup;
 			children = (
+				3BA620D327EEDBF10004A63E /* README.md */,
 				3B1C71492722487A000505BF /* Carafe */,
 				3B1C71482722487A000505BF /* Products */,
 			);
@@ -179,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA620D427EEDBF10004A63E /* README.md in Resources */,
 				3B1C71522722487C000505BF /* Preview Assets.xcassets in Resources */,
 				3B1C714F2722487C000505BF /* Assets.xcassets in Resources */,
 			);
