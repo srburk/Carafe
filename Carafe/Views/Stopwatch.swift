@@ -16,6 +16,10 @@ struct Stopwatch: View {
     
     @AppStorage("hapticsOn") var hapticsOn: Bool = true
     
+    // MARK: Custom Colors
+    @AppStorage("lightAccent") var lightAccent: String = "orange"
+    @AppStorage("darkAccent") var darkAccent: String = "blue"
+    
     @Environment(\.colorScheme) var colorScheme
     
     // state objects
@@ -46,6 +50,7 @@ struct Stopwatch: View {
                     .rotation(.degrees(270))
                     .stroke((colorScheme == .light) ? .orange : .blue, style: StrokeStyle(lineWidth: 7, lineCap: .round))
                     .frame(width: 325, height: 325)
+                    .animation(Animation.easeIn)
                 
                 VStack {
                     
@@ -56,9 +61,9 @@ struct Stopwatch: View {
                         .onReceive(timer) { _ in
                             if (timerActive) {
                                 if (timerObject.timeRemaining != 0) {
-                                    withAnimation {
+//                                    withAnimation {
                                         timerObject.timeRemaining -= 1
-                                    }
+//                                    }
                                 } else {
                                     timerActive = false
                                 }

@@ -18,12 +18,20 @@ struct Settings: View {
     
     @AppStorage("hapticsOn") var hapticsOn: Bool = true
     @AppStorage("useDarkMode") var useDarkMode: Bool = false
+
+    // MARK: Custom Colors
+    @AppStorage("lightAccent") var lightAccent: String = "orange"
+    @AppStorage("darkAccent") var darkAccent: String = "blue"
     
     @AppStorage("waterPreset1") var waterPreset1: Double = 350;
     @AppStorage("waterPreset2") var waterPreset2: Double = 450;
     @AppStorage("waterPreset3") var waterPreset3: Double = 600;
     
     @Binding var selectedBrewMethod: BrewMethod?
+    
+    //MARK: States
+    @State var lightAccentColor: Color = .orange
+    @State var darkAccentColor: Color = .blue
     
     // MARK: Feedback Info
     let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
@@ -93,11 +101,36 @@ struct Settings: View {
                                     Text("Always Use Dark Mode")
                                 })
                             }
-                            Section(header: Text("Light Accent")) {
-                                Text("Color")
+                            Section(header: Text("Accent Colors")) {
+                                ColorPicker("Light Accent", selection: $lightAccentColor)
+                                ColorPicker("Dark Accent", selection: $darkAccentColor)
                             }
-                            Section(header: Text("Dark Accent")) {
-                                Text("Color")
+                            
+                            Section(header: Text("Light Accent")) {
+                                ScrollView(.horizontal) {
+                                    HStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(.orange)
+                                            .frame(width: 40, height: 40)
+                                            .padding(4)
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(.blue)
+                                            .frame(width: 40, height: 40)
+                                            .padding(4)
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(.purple)
+                                            .frame(width: 40, height: 40)
+                                            .padding(4)
+                                    }
+                                    
+                                }
+                            }
+                            
+                            .onChange(of: lightAccentColor) { _ in
+                                lightAccent = lightAccentColor.description
+                            }
+                            .onChange(of: darkAccentColor) { _ in
+                                darkAccent = darkAccentColor.description
                             }
                         }
                         .navigationBarTitle("Theme")
@@ -160,7 +193,7 @@ struct Settings: View {
                 Section {
                     
                     NavigationLink(destination: Help()) {
-                        Label("Help", systemImage: "person.fill.questionmark")
+                        Label("Help", systemImage: "questionmark.circle")
                     }.foregroundColor(.primary)
                     
                     NavigationLink(destination: About()) {

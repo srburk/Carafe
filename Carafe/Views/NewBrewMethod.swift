@@ -33,7 +33,7 @@ struct NewBrewMethod: View {
                 Stepper("1:\(brewRatio)", value: $brewRatio, in: 1...50, step: 1)
             }
             
-            Section(header: Text("Timer Amount")) {
+            Section(header: Text("Timer Amount"), footer: Text("Set a timer to brew your coffee perfectly")) {
                 
                 GeometryReader { geometry in
                     HStack(spacing: 0) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Theme : Codable, CaseIterable {
     case auto, dark, light
