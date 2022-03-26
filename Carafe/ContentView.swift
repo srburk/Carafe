@@ -40,6 +40,7 @@ struct ContentView: View {
 
     // Persistent Store
     @StateObject var mainStore: Store
+    @StateObject var timerObject = TimerObject()
     
     // MARK: States
     @State var brewMethodName = ""
@@ -80,7 +81,7 @@ struct ContentView: View {
                     // MARK: Stopwatch View
                     if (showingTimerView) {
                         
-                        Stopwatch()
+                        Stopwatch(timerObject: timerObject)
                             .padding(.top, 50)
                         
                         Spacer()
@@ -210,7 +211,7 @@ struct ContentView: View {
                                 Image(systemName: "chevron.down")
                                 
                                 Text("\(selectedBrewMethod?.title ?? " ")")
-                                    .font(.title3)
+//                                    .font(.title3)
                             }
                             .foregroundColor(.white)
                         }
@@ -230,7 +231,13 @@ struct ContentView: View {
                                 }
                             }
                         }) {
-                            Image(systemName: "timer").foregroundColor(.white)
+                            HStack {
+                                if (!showingTimerView) {
+                                    Text("\(timerObject.timeRemaining / 60):\((timerObject.timeRemaining % 60 == 0) ? "00" : String(timerObject.timeRemaining % 60))").foregroundColor(.white)
+                                }
+                                Image(systemName: "timer").foregroundColor(.white)
+
+                            }
                         }
                     }
                 }
