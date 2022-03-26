@@ -35,14 +35,6 @@ struct ContentView: View {
     @AppStorage("waterPreset3") var waterPreset3: Double = 600;
     @AppStorage("useDarkMode") var useDarkMode: Bool = false
     
-    func customPrimary() -> Color {
-        if (useDarkMode || colorScheme == .dark) {
-            return Color.white
-        } else {
-            return Color.black
-        }
-    }
-    
     // MARK: Environment Variables
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.scenePhase) private var scenePhase
@@ -303,6 +295,7 @@ struct ContentView: View {
                 }
                 
             } else if phase == .active {
+                                
                 amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 17
                 amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
                 

@@ -45,6 +45,9 @@ struct WaterPreset: View {
             }
             
         }
+        
+        .shadow(radius: 2)
+        
         .onTapGesture {
             if (hapticsOn) {
                 let impact = UIImpactFeedbackGenerator(style: .light)

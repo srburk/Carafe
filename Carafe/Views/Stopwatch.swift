@@ -112,8 +112,9 @@ struct Stopwatch: View {
             Button(action: {
                 showingAlert = true
             }) {
-                Text("Reset").foregroundColor(.red)
+                Text("Reset")
                     .padding()
+                    .foregroundColor(.red)
             }
         }
         .alert(isPresented: $showingAlert) {

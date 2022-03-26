@@ -202,6 +202,7 @@ struct Settings: View {
                 }
             }
         }
+        .environment(\.colorScheme, (useDarkMode || colorScheme == .dark) ? .dark : .light)
     }
 }
 
