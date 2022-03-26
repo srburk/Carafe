@@ -11,6 +11,8 @@ struct NewBrewMethod: View {
     
     @State var title: String
     @State var brewRatio: Int
+    @State var minuteAmount: Int = 3
+    @State var secondAmount: Int = 0
 //    @ObservedObject var brewMethodStore: BrewMethodStore
     
     @ObservedObject var mainStore: Store
@@ -30,6 +32,36 @@ struct NewBrewMethod: View {
             Section(header: Text("Ratio"), footer: Text("Enter your preferred ratio for this brewing method")) {
                 Stepper("1:\(brewRatio)", value: $brewRatio, in: 1...50, step: 1)
             }
+            
+            Section(header: Text("Timer Amount")) {
+                
+                GeometryReader { geometry in
+                    HStack(spacing: 0) {
+                        Picker("Timer Amount", selection: $minuteAmount) {
+                            ForEach(0...59, id: \.self) { number in
+//                                (number == minuteAmount) ? Text("\(number)") + Text(" minutes").fontWeight(.semibold): Text("\(number)")
+                                Text("\(number)")
+                            }
+                        }
+                        .overlay(Text("min").fontWeight(.semibold).padding(.leading, 65))
+                        .pickerStyle(.wheel)
+                        .frame(maxWidth: geometry.size.width / 2)
+                        .clipped()
+                        
+                        Picker("Timer Amount", selection: $secondAmount) {
+                            ForEach(0...59, id: \.self) { number in
+//                                (number == secondAmount) ? Text("\(number)") + Text(" seconds").fontWeight(.semibold): Text("\(number)")
+                                Text("\(number)")
+                            }
+                        }
+                        .overlay(Text("sec").fontWeight(.semibold).padding(.leading, 65))
+                        .pickerStyle(.wheel)
+                        .frame(maxWidth: geometry.size.width / 2)
+                        .clipped()
+                    }
+                }
+                .frame(height: 200)
+            }
         }
         .onChange(of: title) { newState in
             if (title != "" || title != " ") {
@@ -44,7 +76,7 @@ struct NewBrewMethod: View {
                     
                     if (isActive) {
                         
-                        let newBrewMethod = BrewMethod(id: UUID(), title: title, brewRatio: brewRatio)
+                        let newBrewMethod = BrewMethod(id: UUID(), title: title, brewRatio: brewRatio, timerAmount: ((minuteAmount * 60) + secondAmount))
                         
                         mainStore.storage.brewMethods.append(newBrewMethod)
                         

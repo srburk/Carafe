@@ -262,6 +262,9 @@ struct ContentView: View {
                         selectedBrewMethod = (mainStore.storage.brewMethods.count == 0) ? nil : mainStore.storage.brewMethods.first
                     }
                     
+                    timerObject.totalTime = selectedBrewMethod?.timerAmount ?? 180
+                    timerObject.timeRemaining = selectedBrewMethod?.timerAmount ?? 180
+
                 }
             }
             
@@ -294,12 +297,16 @@ struct ContentView: View {
             } else if phase == .active {
                 amountObject.brewRatio = selectedBrewMethod?.brewRatio ?? 17
                 amountObject.selectedUnit = mainStore.storage.defaults.defaultUnits
+                
+                timerObject.totalTime = selectedBrewMethod?.timerAmount ?? 180
+                timerObject.timeRemaining = selectedBrewMethod?.timerAmount ?? 180
+
             }
                 
         }
         
         .sheet(isPresented: $isShowingSettings) {
-            Settings(mainStore: mainStore, amountObject: amountObject, selectedBrewMethod: $selectedBrewMethod)
+            Settings(mainStore: mainStore, amountObject: amountObject, timerObject: timerObject, selectedBrewMethod: $selectedBrewMethod)
         }
         
         .fullScreenCover(isPresented: $needsOnboarding) {

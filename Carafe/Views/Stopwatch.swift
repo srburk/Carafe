@@ -18,6 +18,7 @@ struct Stopwatch: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    // state objects
     @StateObject var timerObject: TimerObject
     
     @State var timerActive: Bool = false
