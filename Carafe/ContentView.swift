@@ -233,7 +233,7 @@ struct ContentView: View {
                         }) {
                             HStack {
                                 if (!showingTimerView) {
-                                    Text("\(timerObject.timeRemaining / 60):\((timerObject.timeRemaining % 60 == 0) ? "00" : String(timerObject.timeRemaining % 60))").foregroundColor(.white)
+                                    Text("\(timerObject.timeRemaining / 60):\((timerObject.timeRemaining % 60 < 10) ? "0\(timerObject.timeRemaining % 60)" : String(timerObject.timeRemaining % 60))").foregroundColor(.white)
                                 }
                                 Image(systemName: "timer").foregroundColor(.white)
 

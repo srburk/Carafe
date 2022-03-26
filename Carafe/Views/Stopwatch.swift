@@ -48,7 +48,7 @@ struct Stopwatch: View {
                 
                 VStack {
                     
-                    Text("\(timerObject.timeRemaining / 60):\((timerObject.timeRemaining % 60 == 0) ? "00" : String(timerObject.timeRemaining % 60))").font(.system(size: 90, weight: .medium)).foregroundColor(.white)
+                    Text("\(timerObject.timeRemaining / 60):\((timerObject.timeRemaining % 60 < 10) ? "0\(timerObject.timeRemaining % 60)" : String(timerObject.timeRemaining % 60))").font(.system(size: 90, weight: .medium)).foregroundColor(.white)
                         .padding(.bottom, 1)
                     
                         // MARK: Receieve Timer Info
