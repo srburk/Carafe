@@ -30,10 +30,11 @@ struct Onboarding: View {
                 
                 Text("Carafe")
                     .foregroundColor(.white)
-                    .font(.largeTitle)
+//                    .font(.largeTitle)
+                    .font(.custom("PlayfairDisplay-Bold", size: 45))
                     .fontWeight(.semibold)
                 
-                Text("Simple coffee ratio calculator for enthusiasts")
+                Text("A simple coffee ratio calculator for enthusiasts")
                     .padding()
                     .foregroundColor(.white)
                 
