@@ -81,7 +81,7 @@ struct ContentView: View {
                     // MARK: Stopwatch View
                     if (showingTimerView) {
                         
-                        Stopwatch(timerObject: timerObject)
+                        Stopwatch(mainStore: mainStore, timerObject: timerObject)
                             .padding(.top, 50)
                         
                         Spacer()

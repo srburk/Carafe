@@ -20,6 +20,25 @@ struct Stopwatch: View {
     @AppStorage("lightAccent") var lightAccent: String = "orange"
     @AppStorage("darkAccent") var darkAccent: String = "blue"
     
+    @StateObject var mainStore: Store
+    
+    func colorOptionsColor(item: ColorOptions) -> Color {
+        switch (item) {
+        case .orange:
+            return Color.orange
+        case .blue:
+            return Color.blue
+        case .green:
+            return Color.green
+        case .yellow:
+            return Color.yellow
+        case .red:
+            return Color.red
+        case .purple:
+            return Color.purple
+        }
+    }
+    
     @Environment(\.colorScheme) var colorScheme
     
     // state objects
@@ -48,7 +67,8 @@ struct Stopwatch: View {
                 Circle()
                     .trim(from: 0, to: CGFloat(1.0 - (Double(timerObject.timeRemaining) / Double(timerObject.totalTime))))
                     .rotation(.degrees(270))
-                    .stroke((colorScheme == .light) ? .orange : .blue, style: StrokeStyle(lineWidth: 7, lineCap: .round))
+//                    .stroke((colorScheme == .light) ? .orange : .blue, style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .stroke((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent!) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent!), style: StrokeStyle(lineWidth: 7, lineCap: .round))
                     .frame(width: 325, height: 325)
                     .animation(Animation.easeIn)
                 
@@ -77,7 +97,7 @@ struct Stopwatch: View {
                             .foregroundColor(Color(red: 55/255, green: 55/255, blue: 58/255))
                         
                         Image(systemName: (timerActive) ? "pause.fill": (timerObject.timeRemaining == 0) ? "arrow.clockwise": "play.fill").scaleEffect(3)
-                            .foregroundColor((colorScheme == .light) ? .orange : .blue)
+                            .foregroundColor((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent!) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent!))
                     }
                     
                     .onTapGesture {
@@ -145,7 +165,7 @@ struct Stopwatch_Previews: PreviewProvider {
             Rectangle()
                 .foregroundColor(.black)
                 .ignoresSafeArea()
-            Stopwatch(timerObject: TimerObject())
+            Stopwatch(mainStore: Store(), timerObject: TimerObject())
         }
     }
 }

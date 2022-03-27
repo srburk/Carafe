@@ -17,11 +17,15 @@ struct Defaults : Codable {
     var defaultUnits: Units
     var defaultBrewMethod: BrewMethod?
     var themeMode: Theme
+    var lightAccent: ColorOptions?
+    var darkAccent: ColorOptions?
     
-    init(cupGramAmount: String, defaultUnits: Units, themeMode: Theme) {
+    init(cupGramAmount: String, defaultUnits: Units, themeMode: Theme, lightAccent: ColorOptions = ColorOptions.orange, darkAccent: ColorOptions = ColorOptions.blue) {
         self.cupGramAmount = cupGramAmount
         self.defaultUnits = defaultUnits
         self.themeMode = themeMode
+        self.lightAccent = lightAccent
+        self.darkAccent = darkAccent
     }
 }
 

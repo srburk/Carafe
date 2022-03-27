@@ -24,6 +24,8 @@
 		3BA620D427EEDBF10004A63E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3BA620D327EEDBF10004A63E /* README.md */; };
 		3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */; };
 		3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D527E2C95100009BD2 /* Settings.swift */; };
+		3BE5E2EF27F01BC500D369FD /* ColorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE5E2EE27F01BC500D369FD /* ColorOptions.swift */; };
+		3BE5E2F127F020FF00D369FD /* AccentColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE5E2F027F020FF00D369FD /* AccentColorPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		3BA620D327EEDBF10004A63E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3BE5E2EE27F01BC500D369FD /* ColorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptions.swift; sourceTree = "<group>"; };
+		3BE5E2F027F020FF00D369FD /* AccentColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentColorPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 				3B26D5AA27E68DAE0097F49B /* History.swift */,
 				3B26D5AE27E6AB000097F49B /* Units.swift */,
 				3B26D5B027E6AB190097F49B /* AmountObject.swift */,
+				3BE5E2EE27F01BC500D369FD /* ColorOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 				3B1E3FE427E9772300B5B488 /* About.swift */,
 				3B1E3FE627E97F1000B5B488 /* Help.swift */,
 				3B7CA9B727EE69980089277B /* Stopwatch.swift */,
+				3BE5E2F027F020FF00D369FD /* AccentColorPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,7 +212,9 @@
 				3B1C714B2722487A000505BF /* CarafeApp.swift in Sources */,
 				3B26D5AD27E6A0430097F49B /* Store.swift in Sources */,
 				3B1E3FE727E97F1000B5B488 /* Help.swift in Sources */,
+				3BE5E2EF27F01BC500D369FD /* ColorOptions.swift in Sources */,
 				3B0834E027E3D8A20080DEED /* NewBrewMethod.swift in Sources */,
+				3BE5E2F127F020FF00D369FD /* AccentColorPicker.swift in Sources */,
 				3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */,
 				3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */,
 			);
