@@ -67,8 +67,7 @@ struct Stopwatch: View {
                 Circle()
                     .trim(from: 0, to: CGFloat(1.0 - (Double(timerObject.timeRemaining) / Double(timerObject.totalTime))))
                     .rotation(.degrees(270))
-//                    .stroke((colorScheme == .light) ? .orange : .blue, style: StrokeStyle(lineWidth: 7, lineCap: .round))
-                    .stroke((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent!) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent!), style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .stroke((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent ?? .orange) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent ?? .blue), style: StrokeStyle(lineWidth: 7, lineCap: .round))
                     .frame(width: 325, height: 325)
                     .animation(Animation.easeIn)
                 
@@ -95,7 +94,7 @@ struct Stopwatch: View {
                             .foregroundColor(Color(red: 55/255, green: 55/255, blue: 58/255))
                         
                         Image(systemName: (timerActive) ? "pause.fill": (timerObject.timeRemaining == 0) ? "arrow.clockwise": "play.fill").scaleEffect(3)
-                            .foregroundColor((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent!) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent!))
+                            .foregroundColor((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent ?? .orange) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent ?? .blue))
                     }
                     
                     .onTapGesture {

@@ -35,7 +35,7 @@ struct Settings: View {
     
     // MARK: Feedback Info
     let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
-    let appVersion = "1.0"
+    let appVersion = "1.1"
     
     func delete(at offsets: IndexSet) {
                 

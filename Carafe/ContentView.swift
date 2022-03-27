@@ -49,7 +49,7 @@ struct ContentView: View {
     @State private var isShowingSettings = false
     
     // MARK: TESTING SHEET SWIPING
-    @State var bottomSheetHeight = 550
+    @State var bottomSheetHeight = (UIScreen.main.bounds.width < 700) ? 450 : 550
     @State var showingTimerView = false
     
     @StateObject var amountObject = AmountObject()
@@ -131,7 +131,7 @@ struct ContentView: View {
                                 
                                 withAnimation(.spring(response: 0.35)) {
                                     if (bottomSheetHeight == 75) {
-                                        bottomSheetHeight = 550
+                                        bottomSheetHeight = (UIScreen.main.bounds.width < 700) ? 450 : 550
                                         showingTimerView = false
                                     } else {
                                         bottomSheetHeight = 75
@@ -237,7 +237,7 @@ struct ContentView: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.35)) {
                                 if (bottomSheetHeight == 75) {
-                                    bottomSheetHeight = 550
+                                    bottomSheetHeight = (UIScreen.main.bounds.width < 700) ? 450 : 550
                                     showingTimerView = false
                                 } else {
                                     bottomSheetHeight = 75

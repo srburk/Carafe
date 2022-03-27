@@ -11,7 +11,7 @@ struct AboutField: View {
 
     var body: some View {
         Text("It was built by ") +
-        Text("Sam Burkhard").fontWeight(.bold).foregroundColor(Color(red: 123/255, green: 104/255, blue: 238/255)) +
+        Text("Sam Burkhard").fontWeight(.bold).foregroundColor(.blue) +
         Text(", a Computer Engineering Student at the University of Cincinnati")
     }
     
@@ -28,9 +28,7 @@ struct About: View {
 //                .padding(.top, 25)
             Text("Carafe")
                 .foregroundColor(.primary)
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-            
+                .font(.custom("PlayfairDisplay-Bold", size: 45))
             Divider()
             
             Text("Carafe is a simple coffee ratio calculator for anyone who loves making coffee.")

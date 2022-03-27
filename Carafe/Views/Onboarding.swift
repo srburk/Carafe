@@ -30,7 +30,6 @@ struct Onboarding: View {
                 
                 Text("Carafe")
                     .foregroundColor(.white)
-//                    .font(.largeTitle)
                     .font(.custom("PlayfairDisplay-Bold", size: 45))
                     .fontWeight(.semibold)
                 
