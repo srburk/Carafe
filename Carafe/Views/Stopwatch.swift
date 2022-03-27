@@ -81,9 +81,7 @@ struct Stopwatch: View {
                         .onReceive(timer) { _ in
                             if (timerActive) {
                                 if (timerObject.timeRemaining != 0) {
-//                                    withAnimation {
-                                        timerObject.timeRemaining -= 1
-//                                    }
+                                    timerObject.timeRemaining -= 1
                                 } else {
                                     timerActive = false
                                 }
@@ -142,6 +140,7 @@ struct Stopwatch: View {
                     .foregroundColor(.red)
             }
         }
+        .transition(AnyTransition.scale)
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Reset this timer?"), message: Text("You can always start another one"),
                   primaryButton: .default(
@@ -152,6 +151,7 @@ struct Stopwatch: View {
                     Text("Reset"),
                     action: {
                         showingAlert = false
+                        timerActive = false
                         timerObject.timeRemaining = timerObject.totalTime
                     }
                   ))

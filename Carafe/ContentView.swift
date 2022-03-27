@@ -64,6 +64,35 @@ struct ContentView: View {
             }
         }
     }
+    
+    var timerLabel: some View {
+        VStack {
+            Stopwatch(mainStore: mainStore, timerObject: timerObject)
+                .padding(.top, 50)
+            
+            Spacer()
+            
+            Text(amountObject.coffeeAmount + " grams of coffee")
+                .foregroundColor(.white)
+                .font(.system(size: 25, weight: .medium))
+                .padding(.bottom, 150)
+        }
+    }
+    
+    var coffeeLabel: some View {
+        VStack {
+            Text(amountObject.coffeeAmount)
+                .foregroundColor(.white)
+                .font(.system(size: 100, weight: .semibold))
+            
+            Text("grams of coffee")
+                .foregroundColor(.white)
+                .font(.system(size: 25, weight: .regular))
+                .padding(.bottom, 25)
+            
+            Spacer()
+        }
+    }
             
     var body: some View {
         NavigationView {
@@ -81,31 +110,16 @@ struct ContentView: View {
                     // MARK: Stopwatch View
                     if (showingTimerView) {
                         
-                        Stopwatch(mainStore: mainStore, timerObject: timerObject)
-                            .padding(.top, 50)
-                        
-                        Spacer()
-                        
-                        Text(amountObject.coffeeAmount + " grams of coffee")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25, weight: .medium))
-                            .padding(.bottom, 150)
+                        timerLabel
+                            .transition(.scale)
+
                     } else {
                         
-                        Text(amountObject.coffeeAmount)
-                            .foregroundColor(.white)
-                            .font(.system(size: 100, weight: .semibold))
+                        coffeeLabel
+                            .transition(.scale)
                         
-                        Text("grams of coffee")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25, weight: .regular))
-                            .padding(.bottom, 25)
-                        
-                        Spacer()
                     }
                     
-                    
-                        
                     ZStack {
                         
                         Rectangle()
