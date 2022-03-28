@@ -93,7 +93,9 @@ struct Stopwatch: View {
                             .frame(width: 100, height: 100)
                             .foregroundColor(Color(red: 55/255, green: 55/255, blue: 58/255))
                         
-                        Image(systemName: (timerActive) ? "pause.fill": (timerObject.timeRemaining == 0) ? "arrow.clockwise": "play.fill").scaleEffect(3)
+                        Image(systemName: (timerActive) ? "pause.fill": (timerObject.timeRemaining == 0) ? "arrow.clockwise": "play.fill")
+                            .font(.system(size: 55))
+//                            .scaleEffect(3)
                             .foregroundColor((colorScheme == .light) ? colorOptionsColor(item: mainStore.storage.defaults.lightAccent ?? .orange) : colorOptionsColor(item: mainStore.storage.defaults.darkAccent ?? .blue))
                     }
                     
