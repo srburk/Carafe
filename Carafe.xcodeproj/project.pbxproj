@@ -21,18 +21,6 @@
 		3B26D5B127E6AB190097F49B /* AmountObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B26D5B027E6AB190097F49B /* AmountObject.swift */; };
 		3B4A533027E7BC1800D8E5E1 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */; };
 		3B7CA9B827EE69980089277B /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7CA9B727EE69980089277B /* Stopwatch.swift */; };
-		3B98681627F116BD0069F721 /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680A27F116BD0069F721 /* PlayfairDisplay-Bold.ttf */; };
-		3B98681727F116BD0069F721 /* PlayfairDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680B27F116BD0069F721 /* PlayfairDisplay-SemiBold.ttf */; };
-		3B98681827F116BD0069F721 /* PlayfairDisplay-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680C27F116BD0069F721 /* PlayfairDisplay-BoldItalic.ttf */; };
-		3B98681927F116BD0069F721 /* PlayfairDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680D27F116BD0069F721 /* PlayfairDisplay-Medium.ttf */; };
-		3B98681A27F116BD0069F721 /* PlayfairDisplay-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680E27F116BD0069F721 /* PlayfairDisplay-BlackItalic.ttf */; };
-		3B98681B27F116BD0069F721 /* PlayfairDisplay-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98680F27F116BD0069F721 /* PlayfairDisplay-SemiBoldItalic.ttf */; };
-		3B98681C27F116BD0069F721 /* PlayfairDisplay-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681027F116BD0069F721 /* PlayfairDisplay-Italic.ttf */; };
-		3B98681D27F116BD0069F721 /* PlayfairDisplay-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681127F116BD0069F721 /* PlayfairDisplay-ExtraBoldItalic.ttf */; };
-		3B98681E27F116BD0069F721 /* PlayfairDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681227F116BD0069F721 /* PlayfairDisplay-ExtraBold.ttf */; };
-		3B98681F27F116BD0069F721 /* PlayfairDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681327F116BD0069F721 /* PlayfairDisplay-Black.ttf */; };
-		3B98682027F116BD0069F721 /* PlayfairDisplay-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681427F116BD0069F721 /* PlayfairDisplay-MediumItalic.ttf */; };
-		3B98682127F116BD0069F721 /* PlayfairDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B98681527F116BD0069F721 /* PlayfairDisplay-Regular.ttf */; };
 		3BA620D427EEDBF10004A63E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3BA620D327EEDBF10004A63E /* README.md */; };
 		3BAF91D427E2BE3B00009BD2 /* WaterPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */; };
 		3BAF91D627E2C95100009BD2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF91D527E2C95100009BD2 /* Settings.swift */; };
@@ -57,18 +45,6 @@
 		3B26F21927E2F65A00CD8F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4A532F27E7BC1800D8E5E1 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		3B7CA9B727EE69980089277B /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
-		3B98680A27F116BD0069F721 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Bold.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
-		3B98680B27F116BD0069F721 /* PlayfairDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-SemiBold.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
-		3B98680C27F116BD0069F721 /* PlayfairDisplay-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-BoldItalic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-BoldItalic.ttf"; sourceTree = "<group>"; };
-		3B98680D27F116BD0069F721 /* PlayfairDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Medium.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-Medium.ttf"; sourceTree = "<group>"; };
-		3B98680E27F116BD0069F721 /* PlayfairDisplay-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-BlackItalic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-BlackItalic.ttf"; sourceTree = "<group>"; };
-		3B98680F27F116BD0069F721 /* PlayfairDisplay-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-SemiBoldItalic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		3B98681027F116BD0069F721 /* PlayfairDisplay-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Italic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-Italic.ttf"; sourceTree = "<group>"; };
-		3B98681127F116BD0069F721 /* PlayfairDisplay-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-ExtraBoldItalic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		3B98681227F116BD0069F721 /* PlayfairDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-ExtraBold.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
-		3B98681327F116BD0069F721 /* PlayfairDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Black.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-Black.ttf"; sourceTree = "<group>"; };
-		3B98681427F116BD0069F721 /* PlayfairDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-MediumItalic.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
-		3B98681527F116BD0069F721 /* PlayfairDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Regular.ttf"; path = "../../../../../../Downloads/Playfair_Display/static/PlayfairDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		3BA620D327EEDBF10004A63E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BAF91D327E2BE3B00009BD2 /* WaterPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPreset.swift; sourceTree = "<group>"; };
 		3BAF91D527E2C95100009BD2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -119,7 +95,6 @@
 		3B1C71492722487A000505BF /* Carafe */ = {
 			isa = PBXGroup;
 			children = (
-				3B98680627F115620069F721 /* Fonts */,
 				3B26D5AC27E6A0430097F49B /* Store.swift */,
 				3BAF91D227E2BE1B00009BD2 /* Views */,
 				3B0834DA27E3C43D0080DEED /* Models */,
@@ -138,25 +113,6 @@
 				3B1C71512722487C000505BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		3B98680627F115620069F721 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				3B98681327F116BD0069F721 /* PlayfairDisplay-Black.ttf */,
-				3B98680E27F116BD0069F721 /* PlayfairDisplay-BlackItalic.ttf */,
-				3B98680A27F116BD0069F721 /* PlayfairDisplay-Bold.ttf */,
-				3B98680C27F116BD0069F721 /* PlayfairDisplay-BoldItalic.ttf */,
-				3B98681227F116BD0069F721 /* PlayfairDisplay-ExtraBold.ttf */,
-				3B98681127F116BD0069F721 /* PlayfairDisplay-ExtraBoldItalic.ttf */,
-				3B98681027F116BD0069F721 /* PlayfairDisplay-Italic.ttf */,
-				3B98680D27F116BD0069F721 /* PlayfairDisplay-Medium.ttf */,
-				3B98681427F116BD0069F721 /* PlayfairDisplay-MediumItalic.ttf */,
-				3B98681527F116BD0069F721 /* PlayfairDisplay-Regular.ttf */,
-				3B98680B27F116BD0069F721 /* PlayfairDisplay-SemiBold.ttf */,
-				3B98680F27F116BD0069F721 /* PlayfairDisplay-SemiBoldItalic.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		3BAF91D227E2BE1B00009BD2 /* Views */ = {
@@ -232,20 +188,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B98681627F116BD0069F721 /* PlayfairDisplay-Bold.ttf in Resources */,
-				3B98681E27F116BD0069F721 /* PlayfairDisplay-ExtraBold.ttf in Resources */,
-				3B98681A27F116BD0069F721 /* PlayfairDisplay-BlackItalic.ttf in Resources */,
-				3B98681B27F116BD0069F721 /* PlayfairDisplay-SemiBoldItalic.ttf in Resources */,
-				3B98681F27F116BD0069F721 /* PlayfairDisplay-Black.ttf in Resources */,
-				3B98682127F116BD0069F721 /* PlayfairDisplay-Regular.ttf in Resources */,
-				3B98681D27F116BD0069F721 /* PlayfairDisplay-ExtraBoldItalic.ttf in Resources */,
 				3BA620D427EEDBF10004A63E /* README.md in Resources */,
-				3B98681727F116BD0069F721 /* PlayfairDisplay-SemiBold.ttf in Resources */,
-				3B98682027F116BD0069F721 /* PlayfairDisplay-MediumItalic.ttf in Resources */,
-				3B98681C27F116BD0069F721 /* PlayfairDisplay-Italic.ttf in Resources */,
-				3B98681927F116BD0069F721 /* PlayfairDisplay-Medium.ttf in Resources */,
 				3B1C71522722487C000505BF /* Preview Assets.xcassets in Resources */,
-				3B98681827F116BD0069F721 /* PlayfairDisplay-BoldItalic.ttf in Resources */,
 				3B1C714F2722487C000505BF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +344,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Carafe/Preview Content\"";
@@ -413,7 +358,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Carafe/Preview Content\"";
@@ -445,7 +391,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
